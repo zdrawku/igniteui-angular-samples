@@ -1,18 +1,16 @@
 @import "~igniteui-angular/lib/core/styles/themes/index";
 
 $finjs-palette: igx-palette(#09f, #72da67, #1377d5, #4eb862, #fbb13c, #ff134a);
-@include igx-core();
-
-$exclude: (
-    igx-grid
-);
 
 :host::ng-deep {
     $dark-text: #000;
     $light-text: #000;
     $disabled-text: rgba(255,255,255, .38);
 
+
     .finjs-dark-theme {
+        @include igx-theme($finjs-palette);
+
         .igx-input-group__input::placeholder,
         .igx-input-group__textarea::placeholder {
             color: #999!important;
@@ -33,8 +31,6 @@ $exclude: (
             }
         }
 
-        @include igx-theme($finjs-palette ,$exclude);
-
         // VAR COLORS
     
         $dark-text: #000;
@@ -54,6 +50,7 @@ $exclude: (
     
         // GRID DARK THEME
         $finjs-grid-theme: igx-grid-theme(
+            $palette: $finjs-palette,
             $content-background: $content-background,
             $content-text-color: $light-text,
 
@@ -68,6 +65,7 @@ $exclude: (
             $row-hover-text-color: text-contrast(#222),
             $row-border-color: #333,
             $row-content-focus-background: rgba(106, 227, 104, .20),
+
 
             $cell-selected-background: igx-color($finjs-palette, 'primary'),
             $cell-selected-text-color: igx-color($finjs-palette, 'grays', 900),
@@ -106,6 +104,7 @@ $exclude: (
     
         // CHIPS THEME
         $finjs-chip-theme: igx-chip-theme(
+            $palette: $finjs-palette,
             $chip-background: #333,
             $chip-hover-background: #444,
             $dir-icon-color: $white-60,
@@ -124,6 +123,7 @@ $exclude: (
     
         // CHECKBOX
         $finjs-checkbox-theme: igx-checkbox-theme(
+            $palette: $finjs-palette,
             $empty-color: $white-70,
             $tick-color: $dark-text
         );
@@ -133,7 +133,8 @@ $exclude: (
     
         // TOOLBAR
         $finjs-toolbar-theme: igx-grid-toolbar-theme(
-            $background-color: #222,
+            $palette: $finjs-palette,
+            $background-color: red,
             $dropdown-background: #222
         );
     
@@ -141,7 +142,9 @@ $exclude: (
     
         // BUTTON GROUP
         $finjs-btn-group-theme: igx-button-group-theme(
-            $item-background: #222
+            $palette: $finjs-palette,
+            $item-background: #222,
+            $item-text-color: igx-color($finjs-palette, 'secondary', 500)
         );
 
         @include igx-button-group($finjs-btn-group-theme);
@@ -149,6 +152,7 @@ $exclude: (
     
         // GRID FILTER
         $finjs-filtering-theme: igx-grid-filtering-theme(
+            $palette: $finjs-palette,
             $toggle-icon-color: $white-70,
             $toggle-icon-filtered-color: igx-color($finjs-palette, 'secondary', 500),
             $menu-background: #111,
@@ -160,6 +164,7 @@ $exclude: (
     
         // SLIDER
         $finjs-slider-theme: igx-slider-theme(
+            $palette: $finjs-palette,
             $variant: 'light'
         );
     
@@ -167,6 +172,7 @@ $exclude: (
     
         // SWITCH
         $finjs-switch-theme: igx-switch-theme(
+            $palette: $finjs-palette,
             $variant: 'light'
         );
     
@@ -233,7 +239,13 @@ $exclude: (
             height: 100vh;
             z-index: 0;
         }
+
+        .sort-icon {
+            color: igx-color($finjs-palette, 'secondary');
+        }
     }
+
+
 
     .sliders-holder {
         display: flex;
