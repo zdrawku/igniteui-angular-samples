@@ -245,11 +245,14 @@ $finjs-palette: igx-palette(#09f, #72da67, #1377d5, #4eb862, #fbb13c, #ff134a);
         }
     }
 
-
+    .sample-switch-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     .sliders-holder {
         display: flex;
-        flex-direction: column;
     }
 
     .finjs-slider {
@@ -304,7 +307,7 @@ $finjs-palette: igx-palette(#09f, #72da67, #1377d5, #4eb862, #fbb13c, #ff134a);
     }
 
     .grid__wrapper {
-        padding: 30px 15px;
+        padding: 15px 15px 5px 15px;
 
         // fake black background behind the grid
         &:after {

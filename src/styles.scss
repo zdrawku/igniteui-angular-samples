@@ -181,6 +181,15 @@ $finjs-palette: igx-palette(#09f, #72da67);
 
     @include igx-drop-down($finjs-dropdown-theme);
 
+    // TOOLBAR
+    $finjs-toolbar-theme: igx-grid-toolbar-theme(
+        $palette: $finjs-palette,
+        $background-color: #333,
+        $dropdown-background: #222
+    );
+
+    @include igx-grid-toolbar($finjs-toolbar-theme);
+
     // CHECKBOX
     $finjs-checkbox-theme: igx-checkbox-theme(
         $palette: $finjs-palette,
@@ -212,24 +221,6 @@ $finjs-palette: igx-palette(#09f, #72da67);
     );
 
     @include igx-input-group($finjs-input-group-theme);
-
-    // CHIPS THEME
-    $finjs-chip-theme: igx-chip-theme(
-        $palette: $finjs-palette,
-        $chip-background: #333,
-        $chip-hover-background: #444,
-        $dir-icon-color: $white-60,
-        $order-icon-color:$white-60,
-        $selected-chip-background:#000,
-        $chip-focus-border-color: igx-color($finjs-palette, 'secondary', 500),
-        $selected-chip-focus-border-color: igx-color($finjs-palette, 'secondary', 500),
-        $selected-chip-hover-border-color: $white-40,
-        $remove-icon-hover-color: igx-color($finjs-palette, 'secondary', 500),
-        $order-icon-hover-color: igx-color($finjs-palette, 'secondary', 500),
-        $remove-icon-color: $white-50
-    );
-
-    @include igx-chip($finjs-chip-theme);
 
     // GRID DARK THEME
     $finjs-grid-theme: igx-grid-theme(
@@ -276,6 +267,11 @@ $finjs-palette: igx-palette(#09f, #72da67);
             }
         }
     }
+
+    .crm-sample-toolbar {
+      background: #222;
+    }
+
 }
 
 // grid caption styling
@@ -377,6 +373,19 @@ $finjs-palette: igx-palette(#09f, #72da67);
 
 .relative-container {
     position: relative;
+}
+
+.finjs-sample-toolbar__title {
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-self: flex-start;
+    width: 100%;
+    font-size: 13px;
+}
+
+.finjs-slider label {
+    font-size: 12px;
 }
 
 div.igx-overlay{
