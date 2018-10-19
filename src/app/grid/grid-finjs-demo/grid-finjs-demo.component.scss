@@ -47,6 +47,33 @@ $finjs-palette: igx-palette(#09f, #72da67, #1377d5, #4eb862, #fbb13c, #ff134a);
          $white-70:rgba(255, 255, 255, .62);
          $white-80:rgba(255, 255, 255, .74);
          $white-90:rgba(255, 255, 255, .87);
+
+        .buttonCols.igx-grid__td--selected
+        {
+            background: $content-background!important;
+        }
+
+        .igx-grid__tr {
+            &:hover {
+                .buttonCols {
+                    background: #222!important;
+                }
+            }
+        }
+
+        .igx-grid__tr--selected {
+            background: #333!important;
+            &:hover {
+                .buttonCols {
+                    background: #333!important;
+                }
+            }
+            .buttonCols.igx-grid__td--selected
+            {
+                background: #333!important;
+            }
+
+        }
     
         // GRID DARK THEME
         $finjs-grid-theme: igx-grid-theme(
