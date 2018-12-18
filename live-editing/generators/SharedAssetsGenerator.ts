@@ -17,7 +17,7 @@ const ANGULAR_JSON_TEMPLATE_CSS_SUPPORT_PATH =
 const MAIN_TS_FILE_PATH = path.join(__dirname, "../templates/main.ts.template");
 const APP_COMPONENT_SCSS_PATH = path.join(__dirname, "../../src/app/app.component.scss");
 const APP_COMPONENT_TS_PATH = path.join(__dirname, "../../src/app/app.component.ts");
-
+const AUTOPREFIXED_STYLES = path.join(__dirname, "../../src/styles/styles.css");
 export class SharedAssetsGenerator extends Generator {
     constructor(styleSyntax: StyleSyntax = StyleSyntax.Sass) {
         super(styleSyntax);
@@ -52,8 +52,8 @@ export class SharedAssetsGenerator extends Generator {
     private _generateSharedAssetsWithCSS() {
         let sassCompiler: SassCompiler = new SassCompiler();
 
-        let styles = fs.readFileSync(STYLES_FILE_PATH, "utf8");
-        styles = sassCompiler.compile(styles);
+        let styles = fs.readFileSync(AUTOPREFIXED_STYLES, "utf8");
+        // styles = sassCompiler.compile(styles);
 
         let appComponentStylesFileContent = fs.readFileSync(APP_COMPONENT_SCSS_PATH, "utf8");
         appComponentStylesFileContent = sassCompiler.compile(appComponentStylesFileContent);
