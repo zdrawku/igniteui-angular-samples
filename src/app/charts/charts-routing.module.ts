@@ -35,6 +35,7 @@ import {
 import {
     CategoryChartTrendlinesComponent
 } from "./category-chart/trendline/category-chart-trendlines.component";
+import { chartsRoutesGenerator } from "./charts-routes";
 import {
     DoughnutChartExplosionSampleComponent
 } from "./doughnut-chart/doughnut-chart-explosion-sample/doughnut-chart-explosion-sample.component";
@@ -105,186 +106,42 @@ import { PieChartSamplesModule } from "./pie-chart/pie-chart-samples.module";
 import { PieChartSelectionComponent } from "./pie-chart/pie-chart-selection/pie-chart-selection.component";
 
 export const chartsRoutes: Routes = [
-    {
-        component: DoughnutChartExplosionSampleComponent,
-        data: { displayName: "Doughnut Chart Explosion", parentName: "Doughnut Chart" },
-        path: "doughnut-chart-explosion"
-    },
-    {
-        component: DoughnutChartOverviewSampleComponent,
-        data: { displayName: "Doughnut Chart Overview", parentName: "Doughnut Chart" },
-        path: "doughnut-chart-overview"
-    },
-    {
-        component: DoughnutChartSelectionSampleComponent,
-        data: { displayName: "Doughnut Chart Selection", parentName: "Doughnut Chart" },
-        path: "doughnut-chart-selection"
-    },
-    {
-        component: PieChartDataSampleComponent,
-        data: { displayName: "Pie Chart Data Sample", parentName: "Pie Chart" },
-        path: "pie-chart-data-sample"
-    },
-    {
-        component: PieChartExplosionComponent,
-        data: { displayName: "Pie Chart Explosion", parentName: "Pie Chart" },
-        path: "pie-chart-explosion"
-    },
-    {
-        component: PieChartLegendComponent,
-        data: { displayName: "Pie Chart Legend", parentName: "Pie Chart" },
-        path: "pie-chart-legend"
-    },
-    {
-        component: PieChartOthersComponent,
-        data: { displayName: "Pie Chart Others Slice", parentName: "Pie Chart" },
-        path: "pie-chart-others"
-    },
-    {
-        component: PieChartSelectionComponent,
-        data: { displayName: "Pie Chart Selection", parentName: "Pie Chart" },
-        path: "pie-chart-selection"
-    },
-    {
-        component: CategoryChartOverviewComponent,
-        data: { displayName: "Category Chart Overview", parentName: "Category Chart" },
-        path: "category-chart-overview-sample"
-    },
-    {
-        component: CategoryChartAnnotationsComponent,
-        data: { displayName: "Category Chart Annotations", parentName: "Category Chart" },
-        path: "category-chart-annotations"
-    },
-    {
-        component: CategoryChartOverlapColumnsComponent,
-        data: { displayName: "Category Chart Overlap Columns", parentName: "Category Chart" },
-        path: "category-chart-overlap-columns"
-    },
-    {
-        component: CategoryChartHighlightingComponent,
-        data: { displayName: "Category Chart Highlighting", parentName: "Category Chart" },
-        path: "category-chart-highlighting-sample"
-    },
-    {
-        component: CategoryChartHighVolumeComponent,
-        data: { displayName: "Category Chart High Volume", parentName: "Category Chart" },
-        path: "category-chart-high-volume-sample"
-    },
-    {
-        component: FinancialChartOverviewComponent,
-        data: { displayName: "Financial Chart Overview", parentName: "Financial Chart" },
-        path: "financial-chart-overview-sample"
-    },
-    {
-        component: CategoryChartHighFrequencyComponent,
-        data: { displayName: "Category Chart High Frequency", parentName: "Category Chart" },
-        path: "category-chart-high-frequency-sample"
-    },
-    {
-        component: CategoryChartAxisOptionsComponent,
-        data: { displayName: "Category Chart Axis Options", parentName: "Category Chart" },
-        path: "category-chart-axis-options-sample"
-    },
-    {
-        component: CategoryChartConfigOptionsComponent,
-        data: { displayName: "Category Chart Configuring Options", parentName: "Category Chart" },
-        path: "category-chart-config-options-sample"
-    },
-    {
-        component: CategoryChartTooltipTemplateComponent,
-        data: { displayName: "Category Chart Tooltips Template", parentName: "Category Chart" },
-        path: "category-chart-tooltip-template"
-    },
-    {
-        component: CategoryChartTooltipTypesComponent,
-        data: { displayName: "Category Chart Tooltip Types", parentName: "Category Chart" },
-        path: "category-chart-tooltip-types"
-    },
-    {
-        component: CategoryChartTrendlinesComponent,
-        data: { displayName: "Category Chart Trendline", parentName: "Category Chart" },
-        path: "category-chart-trendline"
-    },
-    {
-        component: FinancialChartPerformanceComponent,
-        data: { displayName: "Financial Chart Performance", parentName: "Financial Chart" },
-        path: "financial-chart-performance"
-    },
-    {
-        component: FinancialChartAnnotationsComponent,
-        data: { displayName: "Financial Chart Annotations", parentName: "Financial Chart" },
-        path: "financial-chart-annotations"
-    },
-    {
-        component: FinancialChartTitlesComponent,
-        data: { displayName: "Financial Chart Titles", parentName: "Financial Chart" },
-        path: "financial-chart-titles"
-    },
-    {
-        component: FinancialChartPanesComponent,
-        data: { displayName: "Financial Chart Panes", parentName: "Financial Chart" },
-        path: "financial-chart-panes"
-    },
-    {
-        component: FinancialChartMultipleDataComponent,
-        data: { displayName: "Financial Chart Multiple Sources", parentName: "Financial Chart" },
-        path: "financial-chart-multiple-data"
-    },
-    {
-        component: FinancialChartMultipleFeedsComponent,
-        data: { displayName: "Financial Chart Multiple Feeds", parentName: "Financial Chart" },
-        path: "financial-chart-multiple-feeds"
-    },
-    {
-        component: FinancialChartIndicatorTypesComponent,
-        data: { displayName: "Financial Chart Indicator Types", parentName: "Financial Chart" },
-        path: "financial-chart-indicator-types"
-    },
-    {
-        component: FinancialChartVolumeTypeComponent,
-        data: { displayName: "Financial Chart Volume Types", parentName: "Financial Chart" },
-        path: "financial-chart-volume-type"
-    },
-    {
-        component: FinancialChartCustomIndicatorsComponent,
-        data: { displayName: "Financial Chart Custom Indicators", parentName: "Financial Chart" },
-        path: "financial-chart-custom-indicators"
-    },
-    {
-        component: FinancialChartHighVolumeComponent,
-        data: { displayName: "Financial Chart High Volume", parentName: "Financial Chart" },
-        path: "financial-chart-high-volume"
-    },
-    {
-        component: FinancialChartHighFrequencyComponent,
-        data: { displayName: "Financial Chart High Frequency", parentName: "Financial Chart" },
-        path: "financial-chart-high-frequency"
-    },
-    {
-        component: FinancialChartAxisTypesComponent,
-        data: { displayName: "Financial Chart Axis Types", parentName: "Financial Chart" },
-        path: "financial-chart-axis-types"
-    },
-    {
-        component: FinancialChartTooltipTemplateComponent,
-        data: { displayName: "Financial Chart Tooltips Template", parentName: "Financial Chart" },
-        path: "financial-chart-tooltip-template"
-    },
-    {
-        component: FinancialChartTooltipTypesComponent,
-        data: { displayName: "Financial Chart Tooltip Types", parentName: "Financial Chart" },
-        path: "financial-chart-tooltip-types"
-    },
-    {
-        component: FinancialChartTimeBasedDataComponent,
-        data: { displayName: "Financial Chart Time Based Data", parentName: "Financial Chart" },
-        path: "financial-chart-time-based-data"
-    },
-    {
-        component: FinancialChartTrendlinesComponent,
-        data: { displayName: "Financial Chart Trendlines", parentName: "Financial Chart" },
-        path: "financial-chart-trendlines"
-    }
+    chartsRoutesGenerator("doughnut-chart-explosion", DoughnutChartExplosionSampleComponent),
+    chartsRoutesGenerator("doughnut-chart-overview", DoughnutChartOverviewSampleComponent),
+    chartsRoutesGenerator("doughnut-chart-selection", DoughnutChartSelectionSampleComponent),
+    chartsRoutesGenerator("pie-chart-data-sample", PieChartDataSampleComponent),
+    chartsRoutesGenerator("pie-chart-explosion", PieChartExplosionComponent),
+    chartsRoutesGenerator("pie-chart-legend", PieChartLegendComponent),
+    chartsRoutesGenerator("pie-chart-others", PieChartOthersComponent),
+    chartsRoutesGenerator("pie-chart-selection", PieChartSelectionComponent),
+    chartsRoutesGenerator("category-chart-overview-sample", CategoryChartOverviewComponent),
+    chartsRoutesGenerator("category-chart-annotations", CategoryChartAnnotationsComponent),
+    chartsRoutesGenerator("category-chart-overlap-columns", CategoryChartOverlapColumnsComponent),
+    chartsRoutesGenerator("category-chart-highlighting-sample", CategoryChartHighlightingComponent),
+    chartsRoutesGenerator("category-chart-high-volume-sample", CategoryChartHighVolumeComponent),
+    chartsRoutesGenerator("category-chart-high-frequency-sample", CategoryChartHighFrequencyComponent),
+    chartsRoutesGenerator("category-chart-axis-options-sample", CategoryChartAxisOptionsComponent),
+    chartsRoutesGenerator("category-chart-config-options-sample", CategoryChartConfigOptionsComponent),
+    chartsRoutesGenerator("category-chart-tooltip-template", CategoryChartTooltipTemplateComponent),
+    chartsRoutesGenerator("category-chart-tooltip-types", CategoryChartTooltipTypesComponent),
+    chartsRoutesGenerator("category-chart-trendline", CategoryChartTrendlinesComponent),
+    chartsRoutesGenerator("financial-chart-overview-sample", FinancialChartOverviewComponent),
+    chartsRoutesGenerator("financial-chart-performance", FinancialChartPerformanceComponent),
+    chartsRoutesGenerator("financial-chart-annotations", FinancialChartAnnotationsComponent),
+    chartsRoutesGenerator("financial-chart-titles", FinancialChartTitlesComponent),
+    chartsRoutesGenerator("financial-chart-panes", FinancialChartPanesComponent),
+    chartsRoutesGenerator("financial-chart-multiple-data", FinancialChartMultipleDataComponent),
+    chartsRoutesGenerator("financial-chart-multiple-feeds", FinancialChartMultipleFeedsComponent),
+    chartsRoutesGenerator("financial-chart-indicator-types", FinancialChartIndicatorTypesComponent),
+    chartsRoutesGenerator("financial-chart-volume-type", FinancialChartVolumeTypeComponent),
+    chartsRoutesGenerator("financial-chart-custom-indicators", FinancialChartCustomIndicatorsComponent),
+    chartsRoutesGenerator("financial-chart-high-volume", FinancialChartHighVolumeComponent),
+    chartsRoutesGenerator("financial-chart-high-frequency", FinancialChartHighFrequencyComponent),
+    chartsRoutesGenerator("financial-chart-axis-types", FinancialChartAxisTypesComponent),
+    chartsRoutesGenerator("financial-chart-tooltip-template", FinancialChartTooltipTemplateComponent),
+    chartsRoutesGenerator("financial-chart-tooltip-types", FinancialChartTooltipTypesComponent),
+    chartsRoutesGenerator("financial-chart-time-based-data", FinancialChartTimeBasedDataComponent),
+    chartsRoutesGenerator("financial-chart-trendlines", FinancialChartTrendlinesComponent)
 ];
 
 @NgModule({

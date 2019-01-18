@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { menusRoutesGenerator } from "./menus-routes";
 import { NavbarSample1Component } from "./navbar/navbar-sample-1/navbar-sample-1.component";
 import { NavbarSample2Component } from "./navbar/navbar-sample-2/navbar-sample-2.component";
 import { NavbarComponent } from "./navbar/navbar.component";
@@ -9,37 +10,13 @@ import { NavDrawerSimpleComponent } from "./navdrawer/nav-drawer-simple/nav-draw
 import { NavdrawerComponent } from "./navdrawer/navdrawer.component";
 
 export const menusRoutes: Routes = [
-    {
-        component: NavdrawerComponent,
-        path: "navigation-drawer"
-    },
-    {
-        component: NavDrawerSimpleComponent,
-        path: "navigation-drawer-simple"
-    },
-    {
-        component: NavDrawerPinComponent,
-        path: "navigation-drawer-pin"
-    },
-    {
-        component: NavDrawerMiniComponent,
-        path: "navigation-drawer-mini"
-    },
-    {
-        component: NavbarComponent,
-        data: { displayName: "Navbar Overview", parentName: "Navbar" },
-        path: "navbar"
-    },
-    {
-        component: NavbarSample1Component,
-        data: { displayName: "Navbar Action Button Icon", parentName: "Navbar" },
-        path: "navbar-sample-1"
-    },
-    {
-        component: NavbarSample2Component,
-        data: { displayName: "Navbar Custom Action Icon", parentName: "Navbar" },
-        path: "navbar-sample-2"
-    }
+    menusRoutesGenerator("navigation-drawer", NavdrawerComponent),
+    menusRoutesGenerator("navigation-drawer-simple", NavDrawerSimpleComponent),
+    menusRoutesGenerator("navigation-drawer-pin", NavDrawerPinComponent),
+    menusRoutesGenerator("navigation-drawer-mini", NavDrawerMiniComponent),
+    menusRoutesGenerator("navbar", NavbarComponent),
+    menusRoutesGenerator("navbar-sample-1", NavbarSample1Component),
+    menusRoutesGenerator("navbar-sample-2", NavbarSample2Component)
 ];
 
 @NgModule({

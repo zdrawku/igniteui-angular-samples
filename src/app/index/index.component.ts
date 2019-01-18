@@ -2,22 +2,22 @@ import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { NavigationStart, Route, Router } from "@angular/router";
 import { IgxNavigationDrawerComponent } from "igniteui-angular";
 import { filter } from "rxjs/operators";
-import { chartsRoutes } from "../charts/charts-routing.module";
-import { dataDisplayRoutes } from "../data-display/data-display-routing.module";
-import { dataEntriesRoutes } from "../data-entries/data-entries-routing.module";
-import { excelLibraryRoutes } from "../excel-library/excel-library-routing.module";
-import { gaugesRoutes } from "../gauges/gauges-routing.module";
-import { gridcrmRoutes } from "../grid-crm/grid-crm-routing.module";
-import { gridsRoutes } from "../grid/grids-routing.module";
-import { interactionsRoutes } from "../interactions/interactions-routing.module";
-import { layoutsRoutes } from "../layouts/layouts-routing.module";
-import { listsRoutes } from "../lists/lists-routing.module";
-import { menusRoutes } from "../menus/menus-routing.module";
-import { notificationsRoutes } from "../notifications/notifications-routing.module";
-import { schedulingRoutes } from "../scheduling/scheduling-routing.module";
-import { servicesRoutes } from "../services/services-routing.module";
-import { themingRoutes } from "../theming/theming-routing.module";
-import { treeGridRoutes } from "../tree-grid/tree-grid-routing.module";
+import { chartsBaseRoutes } from "../charts/charts-routes";
+import { dataDisplayBaseRoutes } from "../data-display/data-display-routes";
+import { dataEntriesBaseRoutes } from "../data-entries/data-entries-routes";
+import { excelLibraryBaseRoutes } from "../excel-library/excel-routes";
+import { gaugesBaseRoutes } from "../gauges/gauges-routes";
+import { gridCRMBaseRoutes } from "../grid-crm/grid-crm-routes";
+import { gridsBaseRoutes } from "../grid/grid-routes";
+import { interactionsBaseRoutes } from "../interactions/interactions-routes";
+import { layoutsBaseRoutes } from "../layouts/layouts-routes";
+import { listsBaseRoutes } from "../lists/lists-routes";
+import { menusBaseRoutes } from "../menus/menus-routes";
+import { notificationsBaseRoutes } from "../notifications/notifications-routes";
+import { schedulingBaseRoutes } from "../scheduling/scheduling-routes";
+import { servicesBaseRoutes } from "../services/services-routes";
+import { themingBaseRoutes } from "../theming/theming-routes";
+import { treeGridBaseRoutes } from "../tree-grid/tree-grid-routes";
 
 @Component({
     selector: "app-index",
@@ -52,68 +52,68 @@ export class IndexComponent implements OnInit, AfterViewInit {
     private modulesRoutes = [
         {
             path: "data-display",
-            routes: dataDisplayRoutes
+            routes: dataDisplayBaseRoutes
         },
         {
             path: "data-entries",
-            routes: dataEntriesRoutes
+            routes: dataEntriesBaseRoutes
         },
         {
             path: "excel-library",
-            routes: excelLibraryRoutes
+            routes: excelLibraryBaseRoutes
         },
         {
             path: "gauges",
-            routes: gaugesRoutes
+            routes: gaugesBaseRoutes
         },
         {
             path: "notifications",
-            routes: notificationsRoutes
+            routes: notificationsBaseRoutes
         },
         {
             path: "charts",
-            routes: chartsRoutes
+            routes: chartsBaseRoutes
         },
         {
             path: "theming",
-            routes: themingRoutes
+            routes: themingBaseRoutes
         },
         {
             path: "menus",
-            routes: menusRoutes
+            routes: menusBaseRoutes
         },
         {
             path: "lists",
-            routes: listsRoutes
+            routes: listsBaseRoutes
         },
         {
             path: "interactions",
-            routes: interactionsRoutes
+            routes: interactionsBaseRoutes
         },
         {
             path: "scheduling",
-            routes: schedulingRoutes
+            routes: schedulingBaseRoutes
         },
         {
             path: "layouts",
-            routes: layoutsRoutes
+            routes: layoutsBaseRoutes
         },
         {
             path: "services",
-            routes: servicesRoutes
+            routes: servicesBaseRoutes
         },
         {
             path: "grid",
-            routes: gridsRoutes
+            routes: gridsBaseRoutes
         },
         {
             path: "grid-crm",
-            routes: gridcrmRoutes
+            routes: gridCRMBaseRoutes
         }
         ,
         {
             path: "tree-grid",
-            routes: treeGridRoutes
+            routes: treeGridBaseRoutes
         }
     ];
 

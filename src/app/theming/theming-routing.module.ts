@@ -6,38 +6,15 @@ import { DisplayDensityComponent } from "./display-density/display-density.compo
 import { ShadowsSampleComponent } from "./shadows/shadows-sample-1/shadows-sample.component";
 import { ShadowsSample2Component } from "./shadows/shadows-sample-2/shadows-sample-2.component";
 import { ThemeChooserSampleComponent } from "./theme-chooser/theme-chooser-sample.component";
+import { themingRoutesGenerator } from "./theming-routes";
 
 export const themingRoutes: Routes = [
-    {
-        component: ThemeChooserSampleComponent,
-        data: { displayName: "Style components with custom themes", parentName: "Themes" },
-        path: "theme-chooser"
-    },
-    {
-        component: DefaultThemeSampleComponent,
-        data: { displayName: "Default theme sample", parentName: "Themes" },
-        path: "default-theme-sample"
-    },
-    {
-        component: DarkThemeSampleComponent,
-        data: { displayName: "Dark theme sample", parentName: "Themes" },
-        path: "dark-theme-sample"
-    },
-    {
-        component: ShadowsSampleComponent,
-        data: { displayName: "Shadows sample", parentName: "Shadows" },
-        path: "shadows-sample"
-    },
-    {
-        component: ShadowsSample2Component,
-        data: { displayName: "Shadows sample 2", parentName: "Shadows" },
-        path: "shadows-sample-2"
-    },
-    {
-        component: DisplayDensityComponent,
-        data: { displayName: "Display density sample", parentName: "Themes" },
-        path: "density"
-    }
+    themingRoutesGenerator("theme-chooser", ThemeChooserSampleComponent),
+    themingRoutesGenerator("default-theme-sample", DefaultThemeSampleComponent),
+    themingRoutesGenerator("dark-theme-sample", DarkThemeSampleComponent),
+    themingRoutesGenerator("shadows-sample", ShadowsSampleComponent),
+    themingRoutesGenerator("shadows-sample-2", ShadowsSample2Component),
+    themingRoutesGenerator("density", DisplayDensityComponent)
 ];
 
 @NgModule({

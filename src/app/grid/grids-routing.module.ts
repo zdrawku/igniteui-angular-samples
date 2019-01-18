@@ -19,6 +19,7 @@ import { GridPasteSampleComponent } from "./grid-paste/grid-paste-sample.compone
 import { RemoteFilteringSampleComponent } from "./grid-remote-filtering-sample/remote-filtering-sample.component";
 import { RemotePagingGridSample } from "./grid-remote-paging-sample/remote-paging-sample.component";
 import { ResizingSampleComponent } from "./grid-resizing-sample/grid-resizing-sample.component";
+import { gridRoutesGenerator } from "./grid-routes";
 import { GridRowEditSampleComponent } from "./grid-row-editing-sample/grid-row-editing-sample.component";
 import { FinancialSampleComponent } from "./grid-sample-2/grid-sample-2.component";
 import { GridSample3Component } from "./grid-sample-3/grid-sample-3.component";
@@ -35,161 +36,37 @@ import { GridMultiColumnHeadersComponent } from "./multi-column-headers/multi-co
 // tslint:enable:max-line-length
 
 export const gridsRoutes: Routes = [
-    {
-        component: GridComponent,
-        data: { displayName: "Grid Basic Features", parentName: "Grid" },
-        path: "grid"
-    },
-    {
-        component: GridSample3Component,
-        data: { displayName: "Grid Summary", parentName: "Grid" },
-        path: "grid-summary"
-    },
-    {
-        component: GridGroupBySampleComponent,
-        data: { displayName: "Grid GroupBy", parentName: "Grid" },
-        path: "grid-groupby"
-    },
-    {
-        component: GridGroupBySummarySampleComponent,
-        data: { displayName: "Grid GroupBy Summary", parentName: "Grid" },
-        path: "grid-groupby-summary"
-    },
-    {
-        component: GridEditingSampleComponent,
-        data: { displayName: "Grid Editing", parentName: "Grid" },
-        path: "grid-editing"
-    },
-    {
-        component: GridRowEditSampleComponent,
-        data: { displayName: "Grid Row Editing", parentName: "Grid" },
-        path: "grid-row-editing"
-    },
-    {
-        component: GridBatchEditingSampleComponent,
-        data: { displayName: "Grid Batch Editing", parentName: "Grid" },
-        path: "grid-batch-editing"
-    },
-    {
-        component: GridDisplayDensitySampleComponent,
-        data: { displayName: "Grid Display Density", parentName: "Grid" },
-        path: "grid-displayDensity"
-    },
-    {
-        component: GridConditionalCellStyleComponent,
-        data: { displayName: "Grid Conditional Cell Styling", parentName: "Grid" },
-        path: "grid-cell-styling"
-    },
-    {
-        component: FilteringSampleComponent,
-        data: { displayName: "Grid Filtering", parentName: "Grid" },
-        path: "grid-filtering-sample"
-    },
-    {
-        component: GridCustomFilteringComponent,
-        data: { displayName: "Custom Filtering Conditions", parentName: "Grid" },
-        path: "grid-filter-conditions"
-    },
-    {
-        component: PagingSampleComponent,
-        data: { displayName: "Grid Paging", parentName: "Grid" },
-        path: "grid-paging-sample"
-    },
-    {
-        component: ResizingSampleComponent,
-        data: { displayName: "Grid Resizing", parentName: "Grid" },
-        path: "grid-resizing-sample"
-    },
-    {
-        component: FinancialSampleComponent,
-        data: { displayName: "Grid Financial Sample", parentName: "Grid" },
-        path: "grid-sample-2"
-    },
-    {
-        component: PinningSampleComponent,
-        data: { displayName: "Grid Pinning", parentName: "Grid" },
-        path: "grid-sample-pinning"
-    },
-    {
-        component: GridRemoteVirtualizationSampleComponent,
-        data: { displayName: "Grid Remote Virtualization", parentName: "Grid" },
-        path: "grid-sample-4"
-    },
-    {
-        component: RemoteFilteringSampleComponent,
-        data: { displayName: "Grid Remote Filtering", parentName: "Grid" },
-        path: "grid-remote-filtering"
-    },
-    {
-        component: GridSelectionSampleComponent,
-        data: { displayName: "Grid Selection", parentName: "Grid" },
-        path: "grid-selection"
-    },
-    {
-        component: GridSearchSampleComponent,
-        data: { displayName: "Grid Search", parentName: "Grid" },
-        path: "grid-search-sample"
-    },
-    {
-        component: GridColumnHidingSampleComponent,
-        data: { displayName: "Grid Column Hiding", parentName: "Grid" },
-        path: "grid-column-hiding-sample"
-    },
-    {
-        component: GridColumnHidingToolbarSampleComponent,
-        data: { displayName: "Grid Column Hiding with Toolbar", parentName: "Grid" },
-        path: "grid-column-hiding-toolbar-sample"
-    },
-    {
-        component: SortingSampleComponent,
-        data: { displayName: "Grid Sorting", parentName: "Grid" },
-        path: "grid-sorting-sample"
-    },
-    {
-        component: GridToolbarSample1Component,
-        data: { displayName: "Grid Toolbar Title", parentName: "Grid" },
-        path: "grid-toolbar-sample-1"
-    },
-    {
-        component: GridToolbarSample2Component,
-        data: { displayName: "Grid Toolbar Options", parentName: "Grid" },
-        path: "grid-toolbar-sample-2"
-    },
-    {
-        component: GridToolbarSample3Component,
-        data: { displayName: "Grid Toolbar Export", parentName: "Grid" },
-        path: "grid-toolbar-sample-3"
-    },
-    {
-        component: GridToolbarSample4Component,
-        data: { displayName: "Grid Toolbar Custom Content", parentName: "Grid" },
-        path: "grid-toolbar-sample-4"
-    },
-    {
-        component: GridMovingSampleComponent,
-        data: { displayName: "Grid Column Moving", parentName: "Grid" },
-        path: "grid-moving-sample"
-    },
-    {
-        component: GridMultiColumnHeadersComponent,
-        data: { displayName: "Grid Multi Column Headers", parentName: "Grid" },
-        path: "multi-column-headers"
-    },
-    {
-        component: RemotePagingGridSample,
-        data: { displayName: "Grid Remote Paging", parentName: "Grid" },
-        path: "grid-remote-paging-sample"
-    },
-    {
-        component: GridPasteSampleComponent,
-        data: { displayName: "Grid Paste From Excel", parentName: "Grid" },
-        path: "grid-paste"
-    },
-    {
-        component: FinJSDemoComponent,
-        data: { displayName: "Grid Finance demo sample", parentName: "Grid" },
-        path: "finjs-sample"
-    }
+    gridRoutesGenerator("grid", GridComponent),
+    gridRoutesGenerator("grid-summary", GridSample3Component),
+    gridRoutesGenerator("grid-groupby", GridGroupBySampleComponent),
+    gridRoutesGenerator("grid-groupby-summary", GridGroupBySummarySampleComponent),
+    gridRoutesGenerator("grid-editing", GridEditingSampleComponent),
+    gridRoutesGenerator("grid-row-editing", GridRowEditSampleComponent),
+    gridRoutesGenerator("grid-batch-editing", GridBatchEditingSampleComponent),
+    gridRoutesGenerator("grid-displayDensity", GridDisplayDensitySampleComponent),
+    gridRoutesGenerator("grid-cell-styling", GridConditionalCellStyleComponent),
+    gridRoutesGenerator("grid-filtering-sample", FilteringSampleComponent),
+    gridRoutesGenerator("grid-filter-conditions", GridCustomFilteringComponent),
+    gridRoutesGenerator("grid-paging-sample", PagingSampleComponent),
+    gridRoutesGenerator("grid-resizing-sample", ResizingSampleComponent),
+    gridRoutesGenerator("grid-sample-2", FinancialSampleComponent),
+    gridRoutesGenerator("grid-sample-pinning", PinningSampleComponent),
+    gridRoutesGenerator("grid-sample-4", GridRemoteVirtualizationSampleComponent),
+    gridRoutesGenerator("grid-remote-filtering", RemoteFilteringSampleComponent),
+    gridRoutesGenerator("grid-selection", GridSelectionSampleComponent),
+    gridRoutesGenerator("grid-search-sample", GridSearchSampleComponent),
+    gridRoutesGenerator("grid-column-hiding-sample", GridColumnHidingSampleComponent),
+    gridRoutesGenerator("grid-column-hiding-toolbar-sample", GridColumnHidingToolbarSampleComponent),
+    gridRoutesGenerator("grid-sorting-sample", SortingSampleComponent),
+    gridRoutesGenerator("grid-toolbar-sample-1", GridToolbarSample1Component),
+    gridRoutesGenerator("grid-toolbar-sample-2", GridToolbarSample2Component),
+    gridRoutesGenerator("grid-toolbar-sample-3", GridToolbarSample3Component),
+    gridRoutesGenerator("grid-toolbar-sample-4", GridToolbarSample4Component),
+    gridRoutesGenerator("grid-moving-sample", GridMovingSampleComponent),
+    gridRoutesGenerator("multi-column-headers", GridMultiColumnHeadersComponent),
+    gridRoutesGenerator("grid-remote-paging-sample", RemotePagingGridSample),
+    gridRoutesGenerator("grid-paste", GridPasteSampleComponent),
+    gridRoutesGenerator("finjs-sample", FinJSDemoComponent)
 ];
 
 @NgModule({

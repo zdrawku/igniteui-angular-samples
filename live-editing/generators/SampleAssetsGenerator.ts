@@ -123,33 +123,17 @@ export class SampleAssetsGenerator extends Generator {
         this._componentRoutes = new Collections.Dictionary<string, string>();
 
         let routes = Routing.samplesRoutes.concat(NotificationsRouting.notificationsRoutes)
-            .concat(DataDisplayRouting.dataDisplayRoutes)
-            .concat(ChartsRouting.chartsRoutes)
-            .concat(DataEntriesRouting.dataEntriesRoutes)
-            .concat(ThemingRouting.themingRoutes)
-            .concat(MenusRouting.menusRoutes)
-            .concat(SchedulingRouting.schedulingRoutes)
-            .concat(GaugesRouting.gaugesRoutes)
-            .concat(ListsRouting.listsRoutes)
-            .concat(InteractionsRouting.interactionsRoutes)
-            .concat(ExcelLibraryRouting.excelLibraryRoutes)
-            .concat(LayoutsRouting.layoutsRoutes)
-            .concat(TreeGridRouting.treeGridRoutes)
-            .concat(GridRouting.gridsRoutes)
-            .concat(GridCRMRouting.gridcrmRoutes);
+            .concat(DataDisplayRouting.dataDisplayRoutes).concat(ChartsRouting.chartsRoutes)
+            .concat(DataEntriesRouting.dataEntriesRoutes).concat(ThemingRouting.themingRoutes)
+            .concat(MenusRouting.menusRoutes).concat(SchedulingRouting.schedulingRoutes)
+            .concat(GaugesRouting.gaugesRoutes).concat(ListsRouting.listsRoutes)
+            .concat(InteractionsRouting.interactionsRoutes).concat(ExcelLibraryRouting.excelLibraryRoutes)
+            .concat(LayoutsRouting.layoutsRoutes).concat(TreeGridRouting.treeGridRoutes)
+            .concat(GridRouting.gridsRoutes).concat(GridCRMRouting.gridcrmRoutes);
 
         for (let i = 0; i < routes.length; i++) {
-            let sample = routes[i];
-            if (sample.component !== undefined) {
-                this._componentRoutes.setValue(sample.component.name, sample.path);
-            } else {
-                // sample with lazy loading, e.g.
-                // "app/excel-library/working-with/cells.module#ExcelLibraryWorkingWithCellsModule"
-                let child = sample.loadChildren.toString();
-                let moduleName = child.split("#")[1];
-                let componentName = moduleName.replace("Module", "Component");
-                this._componentRoutes.setValue(componentName, sample.path);
-            }
+            this._componentRoutes.setValue(Routing.samplesRoutes[i].component.name,
+                Routing.samplesRoutes[i].path);
         }
     }
 
@@ -198,7 +182,7 @@ export class SampleAssetsGenerator extends Generator {
     }
 
     private _getComponentFiles(config: Config,
-        configImports: Collections.Dictionary<string, string>): LiveEditingFile[] {
+                               configImports: Collections.Dictionary<string, string>): LiveEditingFile[] {
         let componentFiles = new Array<LiveEditingFile>();
         let componentModuleSpecifier = configImports.getValue(config.component.name);
         let componentPath = componentModuleSpecifier.replace(GO_DIR_BACK_REG_EX, "");
@@ -384,7 +368,7 @@ export class SampleAssetsGenerator extends Generator {
     }
 
     private _formatAppModuleTypes(types: string[], multiline: boolean, tabsCount: number,
-        suffixIfMultiple: string = null): string {
+                                  suffixIfMultiple: string = null): string {
         if (types.length === 1 && !multiline) {
             return types.join("");
         }

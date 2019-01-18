@@ -7,6 +7,7 @@ import { BulletGraphMeasuresComponent } from "./bullet-graph-measures/bullet-gra
 import { BulletGraphRangesComponent } from "./bullet-graph-ranges/bullet-graph-ranges.component";
 import { BulletGraphScaleComponent } from "./bullet-graph-scale/bullet-graph-scale.component";
 import { BulletGraphTickmarksComponent } from "./bullet-graph-tickmarks/bullet-graph-tickmarks.component";
+import { gaugesRoutesGenerator } from "./gauges-routes";
 import { LinearGaugeAnimationComponent } from "./linear-gauge-animation/linear-gauge-animation.component";
 import { LinearGaugeBackingComponent } from "./linear-gauge-backing/linear-gauge-backing.component";
 import { LinearGaugeLabelsComponent } from "./linear-gauge-labels/linear-gauge-labels.component";
@@ -23,111 +24,27 @@ import { RadialGaugeScaleComponent } from "./radial-gauge-scale/radial-gauge-sca
 import { RadialGaugeTickmarksComponent } from "./radial-gauge-tickmarks/radial-gauge-tickmarks.component";
 
 export const gaugesRoutes: Routes = [
-    {
-        component: BulletGraphAnimationComponent,
-        data: { displayName: "Bullet Graph Animation", parentName: "Bullet Graph" },
-        path: "bullet-graph-animation"
-    },
-    {
-        component: BulletGraphLabelsComponent,
-        data: { displayName: "Bullet Graph Labels", parentName: "Bullet Graph" },
-        path: "bullet-graph-labels"
-    },
-    {
-        component: BulletGraphBackgroundComponent,
-        data: { displayName: "Bullet Graph Background", parentName: "Bullet Graph" },
-        path: "bullet-graph-background"
-    },
-    {
-        component: BulletGraphRangesComponent,
-        data: { displayName: "Bullet Graph Ranges", parentName: "Bullet Graph" },
-        path: "bullet-graph-ranges"
-    },
-    {
-        component: BulletGraphScaleComponent,
-        data: { displayName: "Bullet Graph Scale", parentName: "Bullet Graph" },
-        path: "bullet-graph-scale"
-    },
-    {
-        component: BulletGraphTickmarksComponent,
-        data: { displayName: "Bullet Graph Tickmarks", parentName: "Bullet Graph" },
-        path: "bullet-graph-tickmarks"
-    },
-    {
-        component: BulletGraphMeasuresComponent,
-        data: { displayName: "Bullet Graph Measures", parentName: "Bullet Graph" },
-        path: "bullet-graph-measures"
-    },
-    {
-        component: RadialGaugeAnimationComponent,
-        data: { displayName: "Radial Gauge Animation", parentName: "Radial Gauge" },
-        path: "radial-gauge-animation"
-    },
-    {
-        component: RadialGaugeLabelsComponent,
-        data: { displayName: "Radial Gauge Labels", parentName: "Radial Gauge" },
-        path: "radial-gauge-labels"
-    },
-    {
-        component: RadialGaugeNeedleComponent,
-        data: { displayName: "Radial Gauge Needle", parentName: "Radial Gauge" },
-        path: "radial-gauge-needle"
-    },
-    {
-        component: RadialGaugeScaleComponent,
-        data: { displayName: "Radial Gauge Scale", parentName: "Radial Gauge" },
-        path: "radial-gauge-scale"
-    },
-    {
-        component: RadialGaugeTickmarksComponent,
-        data: { displayName: "Radial Gauge Tickmarks", parentName: "Radial Gauge" },
-        path: "radial-gauge-tickmarks"
-    },
-    {
-        component: RadialGaugeRangesComponent,
-        data: { displayName: "Radial Gauge Ranges", parentName: "Radial Gauge" },
-        path: "radial-gauge-ranges"
-    },
-    {
-        component: RadialGaugeBackingComponent,
-        data: { displayName: "Radial Gauge Backing", parentName: "Radial Gauge" },
-        path: "radial-gauge-backing"
-    },
-    {
-        component: LinearGaugeAnimationComponent,
-        data: { displayName: "Linear Gauge Animation", parentName: "Linear Gauge" },
-        path: "linear-gauge-animation"
-    },
-    {
-        component: LinearGaugeNeedleComponent,
-        data: { displayName: "Linear Gauge Needle", parentName: "Linear Gauge" },
-        path: "linear-gauge-needle"
-    },
-    {
-        component: LinearGaugeBackingComponent,
-        data: { displayName: "Linear Gauge Backing", parentName: "Linear Gauge" },
-        path: "linear-gauge-backing"
-    },
-    {
-        component: LinearGaugeLabelsComponent,
-        data: { displayName: "Linear Gauge Labels", parentName: "Linear Gauge" },
-        path: "linear-gauge-labels"
-    },
-    {
-        component: LinearGaugeScaleComponent,
-        data: { displayName: "Linear Gauge Scale", parentName: "Linear Gauge" },
-        path: "linear-gauge-scale"
-    },
-    {
-        component: LinearGaugeTickmarksComponent,
-        data: { displayName: "Linear Gauge Tickmarks", parentName: "Linear Gauge" },
-        path: "linear-gauge-tickmarks"
-    },
-    {
-        component: LinearGaugeRangesComponent,
-        data: { displayName: "Linear Gauge Ranges", parentName: "Linear Gauge" },
-        path: "linear-gauge-ranges"
-    }
+    gaugesRoutesGenerator("bullet-graph-animation", BulletGraphAnimationComponent),
+    gaugesRoutesGenerator("bullet-graph-labels", BulletGraphLabelsComponent),
+    gaugesRoutesGenerator("bullet-graph-background", BulletGraphBackgroundComponent),
+    gaugesRoutesGenerator("bullet-graph-ranges", BulletGraphRangesComponent),
+    gaugesRoutesGenerator("bullet-graph-scale", BulletGraphScaleComponent),
+    gaugesRoutesGenerator("bullet-graph-tickmarks", BulletGraphTickmarksComponent),
+    gaugesRoutesGenerator("bullet-graph-measures", BulletGraphMeasuresComponent),
+    gaugesRoutesGenerator("radial-gauge-animation", RadialGaugeAnimationComponent),
+    gaugesRoutesGenerator("radial-gauge-labels", RadialGaugeLabelsComponent),
+    gaugesRoutesGenerator("radial-gauge-needle", RadialGaugeNeedleComponent),
+    gaugesRoutesGenerator("radial-gauge-scale", RadialGaugeScaleComponent),
+    gaugesRoutesGenerator("radial-gauge-tickmarks", RadialGaugeTickmarksComponent),
+    gaugesRoutesGenerator("radial-gauge-ranges", RadialGaugeRangesComponent),
+    gaugesRoutesGenerator("radial-gauge-backing", RadialGaugeBackingComponent),
+    gaugesRoutesGenerator("linear-gauge-animation", LinearGaugeAnimationComponent),
+    gaugesRoutesGenerator("linear-gauge-needle", LinearGaugeNeedleComponent),
+    gaugesRoutesGenerator("linear-gauge-backing", LinearGaugeBackingComponent),
+    gaugesRoutesGenerator("linear-gauge-labels", LinearGaugeLabelsComponent),
+    gaugesRoutesGenerator("linear-gauge-scale", LinearGaugeScaleComponent),
+    gaugesRoutesGenerator("linear-gauge-tickmarks", LinearGaugeTickmarksComponent),
+    gaugesRoutesGenerator("linear-gauge-ranges", LinearGaugeRangesComponent)
 ];
 
 @NgModule({

@@ -81,12 +81,6 @@ export const samplesRoutes: Routes = [
         loadChildren: "app/grid-crm/grid-crm.module#GridCRMModule",
         path: "grid-crm"
     },
-        // excel library samples with lazy loading:
-    // {
-    //     data: { displayName: "Workbooks Operations", parentName: "Excel Library" },
-    //     loadChildren: "app/excel-library/operations-on/workbooks.module#ExcelLibraryOperationsOnWorkbooksModule",
-    //     path: "excel-library-operations-on-workbooks"
-    // },
     {
         component: CardSample1Component,
         data: { displayName: "Card with Header and Content", parentName: "Card" },

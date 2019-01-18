@@ -14,76 +14,25 @@ import { ListSample5Component } from "./list/list-sample-5/list-sample-5.compone
 import { ListSample6Component } from "./list/list-sample-6/list-sample-6.component";
 import { ListSample7Component } from "./list/list-sample-7/list-sample-7.component";
 import { ListComponent } from "./list/list.component";
+import { listsRoutesGenerator } from "./lists-routes";
 
 export const listsRoutes: Routes = [
-    {
-        component: ComboMainComponent,
-        path: "combo"
-    },
-    {
-        component: ComboFeatures,
-        data: { displayName: "Combos Features", parentName: "Combo" },
-        path: "combo-features"
-    },
-    {
-        component: ComboRemoteComponent,
-        data: { displayName: "Remote Combo", parentName: "Combo" },
-        path: "combo-remote"
-    },
-    {
-        component: ComboTemplateComponent,
-        data: { displayName: "Templating Combo", parentName: "Combo" },
-        path: "combo-template"
-    },
-    {
-        component: CascadingCombos,
-        data: { displayName: "Cascading Combos", parentName: "Combo" },
-        path: "cascading-combos"
-    },
-    {
-        component: ListComponent,
-        data: { displayName: "List Overview", parentName: "List" },
-        path: "list"
-    },
-    {
-        component: ListSample1Component,
-        path: "list-sample-1"
-    },
-    {
-        component: ListSample2Component,
-        data: { displayName: "List Item Header", parentName: "List" },
-        path: "list-sample-2"
-    },
-    {
-        component: ListSample3Component,
-        data: { displayName: "List Item Template", parentName: "List" },
-        path: "list-sample-3"
-    },
-    {
-        component: ListSample4Component,
-        data: { displayName: "List Search", parentName: "List" },
-        path: "list-sample-4"
-    },
-    {
-        component: ListSample5Component,
-        data: { displayName: "Empty List Template", parentName: "List" },
-        path: "list-sample-5"
-    },
-    {
-        component: ListSample6Component,
-        data: { displayName: "List Loading", parentName: "List" },
-        path: "list-sample-6"
-    },
-    {
-        component: ListSample7Component,
-        data: { displayName: "List Item Panning", parentName: "List" },
-        path: "list-sample-7"
-    },
-    {
-        component: ListChatSampleComponent,
-        data: { displayName: "Chat Component", parentName: "List" },
-        path: "list-chat-sample"
-    }
+    listsRoutesGenerator("combo", ComboMainComponent),
+    listsRoutesGenerator("combo-features", ComboFeatures),
+    listsRoutesGenerator("combo-remote", ComboRemoteComponent),
+    listsRoutesGenerator("combo-template", ComboTemplateComponent),
+    listsRoutesGenerator("cascading-combos", CascadingCombos),
+    listsRoutesGenerator("list", ListComponent),
+    listsRoutesGenerator("list-sample-1", ListSample1Component),
+    listsRoutesGenerator("list-sample-2", ListSample2Component),
+    listsRoutesGenerator("list-sample-3", ListSample3Component),
+    listsRoutesGenerator("list-sample-4", ListSample4Component),
+    listsRoutesGenerator("list-sample-5", ListSample5Component),
+    listsRoutesGenerator("list-sample-6", ListSample6Component),
+    listsRoutesGenerator("list-sample-5", ListSample5Component),
+    listsRoutesGenerator("list-sample-6", ListSample6Component),
+    listsRoutesGenerator("list-sample-7", ListSample7Component),
+    listsRoutesGenerator("list-chat-sample", ListChatSampleComponent)
 ];
 
 @NgModule({

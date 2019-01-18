@@ -1,13 +1,10 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { gridCRMRoutesGenerator } from "./grid-crm-routes";
 import { GridCRMComponent } from "./grid-crm/grid-crm.component";
 
 export const gridcrmRoutes: Routes = [
-    {
-        component: GridCRMComponent,
-        data: { displayName: "Grid CRM", parentName: "Grid" },
-        path: "grid-crm"
-    }
+    gridCRMRoutesGenerator("grid-crm", GridCRMComponent)
 ];
 
 @NgModule({

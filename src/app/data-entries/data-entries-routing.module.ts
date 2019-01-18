@@ -12,6 +12,7 @@ import { ButtonsSample6Component } from "./buttons/buttons-sample-6/buttons-samp
 import { ButtonsSample7Component } from "./buttons/buttons-sample-7/buttons-sample-7.component";
 import { CheckboxSample1Component } from "./checkbox/checkbox-sample-1/checkbox-sample-1.component";
 import { CheckboxSample2Component } from "./checkbox/checkbox-sample-2/checkbox-sample-2.component";
+import { dataEntriesRoutesGenerator } from "./data-entries-routes";
 import { DropdownMenuComponent } from "./dropdown/dropdown-menu/dropdown-menu.component";
 import { DropDownSample1Component } from "./dropdown/dropdown-sample-1/dropdown-sample-1.component";
 import { DropDownSample2Component } from "./dropdown/dropdown-sample-2/dropdown-sample-2.component";
@@ -31,151 +32,35 @@ import { SwitchSample1Component } from "./switch/switch-sample-1/switch-sample-1
 import { SwitchSample2Component } from "./switch/switch-sample-2/switch-sample-2.component";
 
 export const dataEntriesRoutes: Routes = [
-    {
-        component: ButtonGroupSample1Component,
-        data: { displayName: "Button Group Overview", parentName: "Button Group" },
-        path: "button-group-sample-1"
-    },
-    {
-        component: ButtonGroupSample2Component,
-        data: { displayName: "Vertical Button Group", parentName: "Button Group" },
-        path: "button-group-sample-2"
-    },
-    {
-        component: ButtonGroupSample3Component,
-        data: { displayName: "Horizontal Button Group", parentName: "Button Group" },
-        path: "button-group-sample-3"
-    },
-    {
-        component: ButtonsSample1Component,
-        data: { displayName: "Flat Buttons Overview", parentName: "Buttons" },
-        path: "buttons-sample-1"
-    },
-    {
-        component: ButtonsSample2Component,
-        data: { displayName: "Flat Button", parentName: "Buttons" },
-        path: "buttons-sample-2"
-    },
-    {
-        component: ButtonsSample3Component,
-        data: { displayName: "Flat Button Ripple Color", parentName: "Buttons" },
-        path: "buttons-sample-3"
-    },
-    {
-        component: ButtonsSample4Component,
-        data: { displayName: "Flat Button Ripple Color 2", parentName: "Buttons" },
-        path: "buttons-sample-4"
-    },
-    {
-        component: ButtonsSample5Component,
-        data: { displayName: "Raised Button", parentName: "Buttons" },
-        path: "buttons-sample-5"
-    },
-    {
-        component: ButtonsSample6Component,
-        data: { displayName: "Floating Action Button", parentName: "Buttons" },
-        path: "buttons-sample-6"
-    },
-    {
-        component: ButtonsSample7Component,
-        data: { displayName: "Icon Button", parentName: "Buttons" },
-        path: "buttons-sample-7"
-    },
-    {
-        component: CheckboxSample1Component,
-        data: { displayName: "Simple Checkbox", parentName: "Checkbox" },
-        path: "checkbox-sample-1"
-    },
-    {
-        component: CheckboxSample2Component,
-        data: { displayName: "Multiple Checkboxes", parentName: "Checkbox" },
-        path: "checkbox-sample-2"
-    },
-    {
-        component: DropdownMenuComponent,
-        data: { displayName: "Dropdown as Menu", parentName: "Dropdown" },
-        path: "dropdown-menu"
-    },
-    {
-        component: DropDownSample1Component,
-        data: { displayName: "Simple Dropdown", parentName: "Dropdown" },
-        path: "dropdown-sample-1"
-    },
-    {
-        component: DropDownSample2Component,
-        data: { displayName: "Dropdown Selection", parentName: "Dropdown" },
-        path: "dropdown-sample-2"
-    },
-    {
-        component: DropDownSample3Component,
-        data: { displayName: "Dropdown Headers", parentName: "Dropdown" },
-        path: "dropdown-sample-3"
-    },
-    {
-        component: DropDownSample4Component,
-        data: { displayName: "Input Dropdown Selection", parentName: "Dropdown" },
-        path: "dropdown-sample-4"
-    },
-    {
-        component: InputGroupSample1Component,
-        data: { displayName: "Simple Input Group", parentName: "Input Group" },
-        path: "input-group-sample-1"
-    },
-    {
-        component: InputGroupSample2Component,
-        data: { displayName: "Input Required", parentName: "Input Group" },
-        path: "input-group-sample-2"
-    },
-    {
-        component: InputGroupSample3Component,
-        data: { displayName: "Input Group Prefix and Sufix", parentName: "Input Group" },
-        path: "input-group-sample-3"
-    },
-    {
-        component: InputGroupSample4Component,
-        data: { displayName: "Input Group Hint", parentName: "Input Group" },
-        path: "input-group-sample-4"
-    },
-    {
-        component: InputGroupSample5Component,
-        data: { displayName: "Input Group Styling", parentName: "Input Group" },
-        path: "input-group-sample-5"
-    },
-    {
-        component: InputGroupSample6Component,
-        data: { displayName: "Input Group Full Form", parentName: "Input Group" },
-        path: "input-group-sample-6"
-    },
-    {
-        component: ReactiveFormsSampleComponent,
-        data: { displayName: "Reactive Forms Overview", parentName: "Reactive Forms" },
-        path: "reactive-forms"
-    },
-    {
-        component: RadioSample1Component,
-        data: { displayName: "Simple Radio Buttons", parentName: "Radio" },
-        path: "radio-sample-1"
-    },
-    {
-        component: RadioSample2Component,
-        data: { displayName: "Radio Button Binding", parentName: "Radio" },
-        path: "radio-sample-2"
-    },
-    {
-        component: RadioGroupSampleComponent,
-        data: { displayName: "Radio Group", parentName: "Radio" },
-        path: "radio-group-sample"
-    },
-    {
-        component: SwitchSample1Component,
-        data: { displayName: "Switch Overview", parentName: "Switch" },
-        path: "switch-sample-1"
-    },
-    {
-        component: SwitchSample2Component,
-        data: { displayName: "Multiple Switches", parentName: "Switch" },
-        path: "switch-sample-2"
-    }
+    dataEntriesRoutesGenerator("button-group-sample-1", ButtonGroupSample1Component),
+    dataEntriesRoutesGenerator("button-group-sample-2", ButtonGroupSample2Component),
+    dataEntriesRoutesGenerator("button-group-sample-3", ButtonGroupSample3Component),
+    dataEntriesRoutesGenerator("buttons-sample-1", ButtonsSample1Component),
+    dataEntriesRoutesGenerator("buttons-sample-2", ButtonsSample2Component),
+    dataEntriesRoutesGenerator("buttons-sample-3", ButtonsSample3Component),
+    dataEntriesRoutesGenerator("buttons-sample-4", ButtonsSample4Component),
+    dataEntriesRoutesGenerator("buttons-sample-5", ButtonsSample5Component),
+    dataEntriesRoutesGenerator("buttons-sample-6", ButtonsSample6Component),
+    dataEntriesRoutesGenerator("buttons-sample-7", ButtonsSample7Component),
+    dataEntriesRoutesGenerator("checkbox-sample-1", CheckboxSample1Component),
+    dataEntriesRoutesGenerator("checkbox-sample-2", CheckboxSample2Component),
+    dataEntriesRoutesGenerator("dropdown-menu", DropdownMenuComponent),
+    dataEntriesRoutesGenerator("dropdown-sample-1", DropDownSample1Component),
+    dataEntriesRoutesGenerator("dropdown-sample-2", DropDownSample2Component),
+    dataEntriesRoutesGenerator("dropdown-sample-3", DropDownSample3Component),
+    dataEntriesRoutesGenerator("dropdown-sample-4", DropDownSample4Component),
+    dataEntriesRoutesGenerator("input-group-sample-1", InputGroupSample1Component),
+    dataEntriesRoutesGenerator("input-group-sample-2", InputGroupSample2Component),
+    dataEntriesRoutesGenerator("input-group-sample-3", InputGroupSample3Component),
+    dataEntriesRoutesGenerator("input-group-sample-4", InputGroupSample4Component),
+    dataEntriesRoutesGenerator("input-group-sample-5", InputGroupSample5Component),
+    dataEntriesRoutesGenerator("input-group-sample-6", InputGroupSample6Component),
+    dataEntriesRoutesGenerator("reactive-forms", ReactiveFormsSampleComponent),
+    dataEntriesRoutesGenerator("radio-sample-1", RadioSample1Component),
+    dataEntriesRoutesGenerator("radio-sample-2", RadioSample2Component),
+    dataEntriesRoutesGenerator("radio-group-sample", RadioGroupSampleComponent),
+    dataEntriesRoutesGenerator("switch-sample-1", SwitchSample1Component),
+    dataEntriesRoutesGenerator("switch-sample-2", SwitchSample2Component)
 ];
 
 @NgModule({

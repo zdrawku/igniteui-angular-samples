@@ -14,6 +14,7 @@ import { DatepickerSample3Component } from "./datepicker/datepicker-sample-3/dat
 import { DatepickerSample4Component } from "./datepicker/datepicker-sample-4/datepicker-sample-4.component";
 import { DatepickerSample5Component } from "./datepicker/datepicker-sample-5/datepicker-sample-5.component";
 import { DatepickerSample6Component } from "./datepicker/datepicker-sample-6/datepicker-sample-6.component";
+import { schedulingRoutesGenerator } from "./scheduling-routes";
 import { TimePickerSample1Component } from "./timepicker/timepicker-sample-1/timepicker-sample-1.component";
 import { TimePickerSample2Component } from "./timepicker/timepicker-sample-2/timepicker-sample-2.component";
 import { TimePickerSample3Component } from "./timepicker/timepicker-sample-3/timepicker-sample-3.component";
@@ -21,100 +22,25 @@ import { TimePickerSample4Component } from "./timepicker/timepicker-sample-4/tim
 import { TimePickerSample5Component } from "./timepicker/timepicker-sample-5/timepicker-sample-5.component";
 
 export const schedulingRoutes: Routes = [
-    {
-        component: CalendarComponent,
-        path: "calendar"
-    },
-    {
-        component: CalendarSample1Component,
-        data: { displayName: "Calendar Overview", parentName: "Calendar" },
-        path: "calendar-sample-1"
-    },
-    {
-        component: CalendarSample2Component,
-        data: { displayName: "Customized Dates Display", parentName: "Calendar" },
-        path: "calendar-sample-2"
-    },
-    {
-        component: CalendarSample3Component,
-        data: { displayName: "Calendar with Date Range", parentName: "Calendar" },
-        path: "calendar-sample-3"
-    },
-    {
-        component: CalendarSample4Component,
-        data: { displayName: "Conditional Templating and Date Parsing ", parentName: "Calendar" },
-        path: "calendar-sample-4"
-    },
-    {
-        component: CalendarSample5Component,
-        data: { displayName: "Calendar Selection", parentName: "Calendar" },
-        path: "calendar-sample-5"
-    },
-    {
-        component: CalendarSample6Component,
-        data: { displayName: "Calendar disabled dates", parentName: "Calendar" },
-        path: "calendar-sample-6"
-    },
-    {
-        component: CalendarSample7Component,
-        data: { displayName: "Calendar special dates", parentName: "Calendar" },
-        path: "calendar-sample-7"
-    },
-    {
-        component: DatepickerSample1Component,
-        data: { displayName: "Simple Datepicker", parentName: "Datepicker" },
-        path: "datepicker-sample-1"
-    },
-    {
-        component: DatepickerSample2Component,
-        data: { displayName: "One-way data bound Datepicker", parentName: "Datepicker" },
-        path: "datepicker-sample-2"
-    },
-    {
-        component: DatepickerSample3Component,
-        data: { displayName: "Datepicker Buttons", parentName: "Datepicker" },
-        path: "datepicker-sample-3"
-    },
-    {
-        component: DatepickerSample4Component,
-        data: { displayName: "Datepicker Formatter", parentName: "Datepicker" },
-        path: "datepicker-sample-4"
-    },
-    {
-        component: DatepickerSample5Component,
-        data: { displayName: "Datepicker Locales", parentName: "Datepicker" },
-        path: "datepicker-sample-5"
-    },
-    {
-        component: DatepickerSample6Component,
-        data: { displayName: "Datepicker Input Group Template", parentName: "Datepicker" },
-        path: "datepicker-sample-6"
-    },
-    {
-        component: TimePickerSample1Component,
-        data: { displayName: "Timepicker Overview", parentName: "Timepicker" },
-        path: "timepicker-sample-1"
-    },
-    {
-        component: TimePickerSample2Component,
-        data: { displayName: "One-way data bound Timepicker", parentName: "Timepicker" },
-        path: "timepicker-sample-2"
-    },
-    {
-        component: TimePickerSample3Component,
-        data: { displayName: "Timepicker Delta and Spin Mode", parentName: "Timepicker" },
-        path: "timepicker-sample-3"
-    },
-    {
-        component: TimePickerSample4Component,
-        data: { displayName: "Timepicker Validation", parentName: "Timepicker" },
-        path: "timepicker-sample-4"
-    },
-    {
-        component: TimePickerSample5Component,
-        data: { displayName: "Timepicker Input Group Template", parentName: "Timepicker" },
-        path: "timepicker-sample-5"
-    }
+    schedulingRoutesGenerator("calendar", CalendarComponent),
+    schedulingRoutesGenerator("calendar-sample-1", CalendarSample1Component),
+    schedulingRoutesGenerator("calendar-sample-2", CalendarSample2Component),
+    schedulingRoutesGenerator("calendar-sample-3", CalendarSample3Component),
+    schedulingRoutesGenerator("calendar-sample-4", CalendarSample4Component),
+    schedulingRoutesGenerator("calendar-sample-5", CalendarSample5Component),
+    schedulingRoutesGenerator("calendar-sample-6", CalendarSample6Component),
+    schedulingRoutesGenerator("calendar-sample-7", CalendarSample7Component),
+    schedulingRoutesGenerator("datepicker-sample-1", DatepickerSample1Component),
+    schedulingRoutesGenerator("datepicker-sample-2", DatepickerSample2Component),
+    schedulingRoutesGenerator("datepicker-sample-3", DatepickerSample3Component),
+    schedulingRoutesGenerator("datepicker-sample-4", DatepickerSample4Component),
+    schedulingRoutesGenerator("datepicker-sample-5", DatepickerSample5Component),
+    schedulingRoutesGenerator("datepicker-sample-6", DatepickerSample6Component),
+    schedulingRoutesGenerator("timepicker-sample-1", TimePickerSample1Component),
+    schedulingRoutesGenerator("timepicker-sample-2", TimePickerSample2Component),
+    schedulingRoutesGenerator("timepicker-sample-3", TimePickerSample3Component),
+    schedulingRoutesGenerator("timepicker-sample-4", TimePickerSample4Component),
+    schedulingRoutesGenerator("timepicker-sample-5", TimePickerSample5Component)
 ];
 
 @NgModule({
