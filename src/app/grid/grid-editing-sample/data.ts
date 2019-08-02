@@ -191,7 +191,7 @@ export const LOCATIONS = [
         lastInventory: "21/09/2018"
     },
     {
-        shop: "Marketplace from Outerspace",
+        shop: "Funtastico",
         lastInventory: "21/09/2018"
     },
     {

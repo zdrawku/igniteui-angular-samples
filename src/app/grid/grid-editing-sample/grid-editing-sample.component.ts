@@ -22,7 +22,7 @@ export class GridEditingSampleComponent implements OnInit {
     public ngOnInit() {
         this.data = DATA.map((e) => {
             const index = Math.floor(Math.random() * LOCATIONS.length);
-            const count = Math.floor(Math.random() * (LOCATIONS.length - index)) + 1;
+            const count = Math.floor(Math.random() * 3) + 1;
             e.Locations = [...LOCATIONS].splice(index, count);
             return e;
         });
