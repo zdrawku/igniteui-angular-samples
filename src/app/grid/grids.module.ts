@@ -12,6 +12,7 @@ import {
 } from "igniteui-angular";
 import { IgxSparklineCoreModule } from "igniteui-angular-charts/ES5/igx-sparkline-core-module";
 import { IgxSparklineModule } from "igniteui-angular-charts/ES5/igx-sparkline-module";
+import { SparklineDisplayType } from "igniteui-angular-charts/ES5/SparklineDisplayType";
 import { CustomGridPagingStyleSample } from "./custom-grid-paging-style/custom-grid-paging-style.component";
 import { GridBatchEditingSampleComponent } from "./grid-batch-editing/grid-batch-editing-sample.component";
 import { GridWithTransactionsComponent } from "./grid-batch-editing/grid-transaction.component";
