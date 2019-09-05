@@ -59,7 +59,6 @@ import { HierarchicalGridToolbarStyleComponent } from "./hierarchical-grid-toolb
 import { HGridToolbarCustomSampleComponent } from "./hierarchical-grid-toolbar/hierarchical-grid-toolbar-custom.component";
 import { HGridToolbarOptionsSampleComponent } from "./hierarchical-grid-toolbar/hierarchical-grid-toolbar-options.component";
 import { HGridToolbarTitleSampleComponent } from "./hierarchical-grid-toolbar/hierarchical-grid-toolbar-title.component";
-import { SparklineDisplayType } from 'igniteui-angular-charts/ES5/SparklineDisplayType';
 
 @NgModule({
     declarations: [
