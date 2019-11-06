@@ -25,21 +25,22 @@
     "url": "git://github.com/IgniteUI/igniteui-angular-samples/repository.git"
   },
   "dependencies": {
-    "@angular/animations": "9.0.0-rc.0",
-    "@angular/common": "9.0.0-rc.0",
-    "@angular/compiler": "9.0.0-rc.0",
-    "@angular/core": "^9.0.0-rc.0",
-    "@angular/forms": "9.0.0-rc.0",
-    "@angular/platform-browser": "9.0.0-rc.0",
-    "@angular/platform-browser-dynamic": "9.0.0-rc.0",
-    "@angular/router": "9.0.0-rc.0",
+    "@angular/animations": "8.2.12",
+    "@angular/common": "8.2.12",
+    "@angular/compiler": "8.2.12",
+    "@angular/core": "^8.2.12",
+    "@angular/forms": "8.2.12",
+    "@angular/platform-browser": "8.2.12",
+    "@angular/platform-browser-dynamic": "8.2.12",
+    "@angular/router": "8.2.12",
     "@types/file-saver": "^1.3.1",
     "@types/hammerjs": "^2.0.35",
+    "angular-in-memory-web-api": "0.8.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.2",
     "file-saver": "^1.3.8",
     "hammerjs": "^2.0.8",
-    "igniteui-angular": "^9.0.0-beta.2",
+    "igniteui-angular": "^8.2.6",
     "igniteui-angular-charts": "8.0.0",
     "igniteui-angular-core": "8.0.0",
     "igniteui-angular-excel": "8.0.0",
@@ -56,13 +57,13 @@
     "tslib": "^1.9.0",
     "uzip": "0.0.0",
     "web-animations-js": "^2.3.2",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.802.2",
     "@angular/cli": "^8.2.2",
-    "@angular/compiler-cli": "9.0.0-rc.0",
-    "@angular/language-service": "9.0.0-rc.0",
+    "@angular/compiler-cli": "8.2.12",
+    "@angular/language-service": "8.2.12",
     "@types/jasmine": "~3.3.5",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~10.12.18",
@@ -82,7 +83,7 @@
     "sass.js": "0.10.13",
     "ts-node": "^7.0.1",
     "tslint": "5.12.1",
-    "typescript": "3.6.4"
+    "typescript": "3.5.3"
   },
   "browserslist": [
     "> 3%",
