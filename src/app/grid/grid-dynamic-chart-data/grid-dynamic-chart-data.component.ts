@@ -1,7 +1,7 @@
 // tslint:disable: max-line-length
 import { AfterViewInit, Component, Directive, ElementRef, HostListener, OnInit, Pipe, PipeTransform, ViewChild, ViewContainerRef } from "@angular/core";
 import { AutoPositionStrategy, CloseScrollStrategy, HorizontalAlignment, IgxCardComponent, IgxDialogComponent, IgxGridComponent, IgxIconService, IgxOverlayOutletDirective, VerticalAlignment } from "igniteui-angular";
-import { IgxSizeScaleComponent } from "igniteui-angular-charts/ES5/igx-size-scale-component";
+// import { IgxSizeScaleComponent } from "igniteui-angular-charts/ES5/igx-size-scale-component";
 import { FinancialData } from "../services/financialData";
 import { ChartService, IGridDataSelection } from "./chart.service";
 import { IChartArgs } from "./context-menu/context-menu.component";
@@ -122,7 +122,7 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
     };
 
     // Chart, Series, Axes options
-    private bubbleChartSizeScale = new IgxSizeScaleComponent();
+    // private bubbleChartSizeScale = new IgxSizeScaleComponent();
     private rowIndex;
     private colIndex;
     private pieChartOptions: IChartOptions = {
@@ -150,8 +150,8 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
         yMemberPath: "Price",
         radiusMemberPath: "Open Price",
         markerType: 3,
-        showDefaultTooltip: true,
-        radiusScale: this.bubbleChartSizeScale
+        showDefaultTooltip: true
+        // radiusScale: this.bubbleChartSizeScale
     };
 
     private scatterChartXAxisOptions: IXAxesOptions = {
@@ -183,8 +183,8 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
     private chartComponentOptions: IChartComponentOptions;
 
     constructor(private chartService: ChartService, private iconService: IgxIconService) {
-        this.bubbleChartSizeScale.maximumValue = 60;
-        this.bubbleChartSizeScale.minimumValue = 10;
+        // this.bubbleChartSizeScale.maximumValue = 60;
+        // this.bubbleChartSizeScale.minimumValue = 10;
     }
 
     public ngOnInit() {
@@ -447,7 +447,7 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
 
         chartHost.viewContainerRef.clear();
         requestAnimationFrame(() => {
-            this.currentChart = this.chartService.chartFactory(args.chartType, this.gridDataSelection, chartHost.viewContainerRef, this.chartComponentOptions, { seriesModel: seriesOptionModel, seriesType: args.seriesType });
+            this.currentChart = this.chartService.chartFactory(/*args.chartType, this.gridDataSelection, chartHost.viewContainerRef, this.chartComponentOptions, { seriesModel: seriesOptionModel, seriesType: args.seriesType }*/);
             if (dialogToOpen.isCollapsed) {
                 dialogOverlaySettings.outlet = this.outlet;
                 dialogToOpen.open(overlaySettings);

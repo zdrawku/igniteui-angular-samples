@@ -6,7 +6,7 @@ import {
     IgxSliderComponent,
     SortingDirection
 } from "igniteui-angular";
-import { IgxCategoryChartComponent } from "igniteui-angular-charts/ES5/igx-category-chart-component";
+// import { IgxCategoryChartComponent } from "igniteui-angular-charts/ES5/igx-category-chart-component";
 import { timer } from "rxjs";
 import { debounce } from "rxjs/operators";
 import { LocalDataService } from "./localData.service";
@@ -23,7 +23,7 @@ export class FinJSDemoComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild("buttonGroup2", { static: true }) public buttonGroup2: IgxButtonGroupComponent;
     @ViewChild("slider1", { static: true }) public volumeSlider: IgxSliderComponent;
     @ViewChild("slider2", { static: true }) public intervalSlider: IgxSliderComponent;
-    @ViewChild("chart1", { static: true }) public chart1: IgxCategoryChartComponent;
+    // @ViewChild("chart1", { static: true }) public chart1: IgxCategoryChartComponent;
     @ViewChild("dialog", { static: true }) public dialog: IgxDialogComponent;
 
     public properties;
@@ -116,9 +116,9 @@ export class FinJSDemoComponent implements OnInit, AfterViewInit, OnDestroy {
         this.setLabelIntervalAndAngle();
 
         // this.chart1.yAxisFormatLabel = this.formatYAxisLabel;
-        this.chart1.xAxisTitle = xAsis;
-        this.chart1.yAxisTitle = yAxis;
-        this.chart1.chartTitle = title;
+        // this.chart1.xAxisTitle = xAsis;
+        // this.chart1.yAxisTitle = yAxis;
+        // this.chart1.chartTitle = title;
     }
 
     public onButtonAction(event: any) {
@@ -187,8 +187,8 @@ export class FinJSDemoComponent implements OnInit, AfterViewInit, OnDestroy {
         this.chartData = [];
         args.newSelection.forEach(row => {
             this.chartData.push(this.grid1.data[row]);
-            this.chart1.notifyInsertItem(this.chartData, this.chartData.length - 1,
-                this.grid1.data[row]);
+            // this.chart1.notifyInsertItem(this.chartData, this.chartData.length - 1,
+            //     this.grid1.data[row]);
         });
         this.setLabelIntervalAndAngle();
         this.setChartConfig("Countries", "Prices (USD)", "Data Chart with prices by Category and Country");
@@ -200,11 +200,11 @@ export class FinJSDemoComponent implements OnInit, AfterViewInit, OnDestroy {
             this.chartData = this.data.filter(item => item.Region === cell.rowData.Region &&
                 item.Category === cell.rowData.Category);
 
-            this.chart1.notifyInsertItem(this.chartData, this.chartData.length - 1, {});
+            // this.chart1.notifyInsertItem(this.chartData, this.chartData.length - 1, {});
 
             this.setLabelIntervalAndAngle();
-            this.chart1.chartTitle = "Data Chart with prices of " + this.chartData[0].Category + " in " +
-                this.chartData[0].Region + " Region";
+            // this.chart1.chartTitle = "Data Chart with prices of " + this.chartData[0].Category + " in " +
+            //     this.chartData[0].Region + " Region";
 
             this.dialog.open();
         }, 200);
@@ -291,29 +291,29 @@ export class FinJSDemoComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public setLabelIntervalAndAngle() {
         const intervalSet = this.chartData.length;
-        if (intervalSet < 10) {
-            this.chart1.xAxisLabelAngle = 0;
-            this.chart1.xAxisInterval = 1;
-        } else if (intervalSet < 15) {
-            this.chart1.xAxisLabelAngle = 30;
-            this.chart1.xAxisInterval = 1;
-        } else if (intervalSet < 40) {
-            this.chart1.xAxisLabelAngle = 90;
-            this.chart1.xAxisInterval = 1;
-        } else if (intervalSet < 100) {
-            this.chart1.xAxisLabelAngle = 90;
-            this.chart1.xAxisInterval = 3;
-        } else if (intervalSet < 200) {
-            this.chart1.xAxisLabelAngle = 90;
-            this.chart1.xAxisInterval = 5;
-        } else if (intervalSet < 400) {
-            this.chart1.xAxisLabelAngle = 90;
-            this.chart1.xAxisInterval = 7;
-        } else if (intervalSet > 400) {
-            this.chart1.xAxisLabelAngle = 90;
-            this.chart1.xAxisInterval = 10;
-        }
-        this.chart1.yAxisAbbreviateLargeNumbers = true;
+        // if (intervalSet < 10) {
+        //     this.chart1.xAxisLabelAngle = 0;
+        //     this.chart1.xAxisInterval = 1;
+        // } else if (intervalSet < 15) {
+        //     this.chart1.xAxisLabelAngle = 30;
+        //     this.chart1.xAxisInterval = 1;
+        // } else if (intervalSet < 40) {
+        //     this.chart1.xAxisLabelAngle = 90;
+        //     this.chart1.xAxisInterval = 1;
+        // } else if (intervalSet < 100) {
+        //     this.chart1.xAxisLabelAngle = 90;
+        //     this.chart1.xAxisInterval = 3;
+        // } else if (intervalSet < 200) {
+        //     this.chart1.xAxisLabelAngle = 90;
+        //     this.chart1.xAxisInterval = 5;
+        // } else if (intervalSet < 400) {
+        //     this.chart1.xAxisLabelAngle = 90;
+        //     this.chart1.xAxisInterval = 7;
+        // } else if (intervalSet > 400) {
+        //     this.chart1.xAxisLabelAngle = 90;
+        //     this.chart1.xAxisInterval = 10;
+        // }
+        // this.chart1.yAxisAbbreviateLargeNumbers = true;
     }
 
     public formatYAxisLabel(item: any): string {

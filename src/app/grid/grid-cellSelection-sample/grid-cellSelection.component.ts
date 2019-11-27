@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { IgxGridComponent, IgxSnackbarComponent } from "igniteui-angular";
+import { IgxGridComponent } from "igniteui-angular";
 import { DATA } from "../../data/nwindData";
 
 @Component({
@@ -14,7 +14,7 @@ export class GridCellSelectionComponent implements OnInit {
     public selectionModes = [];
 
     @ViewChild("grid", { static: true }) public grid: IgxGridComponent;
-    @ViewChild(IgxSnackbarComponent, { static: true }) public snackbar: IgxSnackbarComponent;
+    // @ViewChild(IgxSnackbarComponent, { static: true }) public snackbar: IgxSnackbarComponent;
 
     constructor() { }
 
@@ -25,12 +25,12 @@ export class GridCellSelectionComponent implements OnInit {
             { label: "single", selected: this.selectionMode === "single", togglable: true },
             { label: "multiple", selected: this.selectionMode === "multiple", togglable: true }
         ];
-        this.snackbar.autoHide = false;
-        this.snackbar.show();
+        // this.snackbar.autoHide = false;
+        // this.snackbar.show();
     }
 
     public selectCellSelectionMode(args) {
         this.selectionMode = this.selectionModes[args.index].label;
-        this.snackbar.show();
+        // this.snackbar.show();
     }
 }

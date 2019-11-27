@@ -1,7 +1,7 @@
 <div class="grid__wrapper">
     <span style="display: flex">
         <igx-buttongroup [values]="selectionModes" (onSelect)="selectCellSelectionMode($event)"></igx-buttongroup>
-        <igx-snackbar #snackbar actionText="Got it. Thanks!" (onAction)="snackbar.hide()">
+        <!-- <igx-snackbar #snackbar actionText="Got it. Thanks!" (onAction)="snackbar.hide()">
             <div class="container">
                 <igx-icon>notification_important</igx-icon>
                 <ng-container *ngIf="selectionMode === 'multiple'">
@@ -26,7 +26,7 @@
                     </ul>
                 </ng-container>
             </div>
-        </igx-snackbar>
+        </igx-snackbar> -->
     </span>
     <br />
     <igx-grid #grid [data]="data" [height]="'530px'" [width]="'100%'" [cellSelection]="selectionMode">

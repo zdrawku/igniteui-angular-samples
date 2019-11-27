@@ -3,8 +3,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { IgxAvatarModule, IgxCsvExporterService, IgxExcelExporterService, IgxGridModule,
     IgxProgressBarModule } from "igniteui-angular";
-import { IgxSparklineCoreModule } from "igniteui-angular-charts/ES5/igx-sparkline-core-module";
-import { IgxSparklineModule } from "igniteui-angular-charts/ES5/igx-sparkline-module";
+// import { IgxSparklineCoreModule } from "igniteui-angular-charts/ES5/igx-sparkline-core-module";
+// import { IgxSparklineModule } from "igniteui-angular-charts/ES5/igx-sparkline-module";
 import { GridCRMRoutingModule } from "./grid-crm-routing.module";
 import { GridCRMComponent } from "./grid-crm/grid-crm.component";
 
@@ -18,9 +18,9 @@ import { GridCRMComponent } from "./grid-crm/grid-crm.component";
         GridCRMRoutingModule,
         IgxGridModule,
         IgxAvatarModule,
-        IgxProgressBarModule,
-        IgxSparklineModule,
-        IgxSparklineCoreModule
+        IgxProgressBarModule
+        // IgxSparklineModule,
+        // IgxSparklineCoreModule
     ],
     providers: [IgxCsvExporterService, IgxExcelExporterService]
 })

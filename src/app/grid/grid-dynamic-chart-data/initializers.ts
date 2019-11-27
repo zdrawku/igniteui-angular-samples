@@ -1,12 +1,12 @@
 // tslint:disable: max-line-length
 import { EventEmitter, Type } from "@angular/core";
-import { IgxCategoryXAxisComponent } from "igniteui-angular-charts/ES5/igx-category-x-axis-component";
-import { IgxCategoryYAxisComponent } from "igniteui-angular-charts/ES5/igx-category-y-axis-component";
-import { IgxDataChartComponent } from "igniteui-angular-charts/ES5/igx-data-chart-component";
-import { IgxNumericXAxisComponent } from "igniteui-angular-charts/ES5/igx-numeric-x-axis-component";
-import { IgxNumericYAxisComponent } from "igniteui-angular-charts/ES5/igx-numeric-y-axis-component";
-import { IgxPieChartComponent } from "igniteui-angular-charts/ES5/igx-pie-chart-component";
-import { IgxStackedFragmentSeriesComponent } from "igniteui-angular-charts/ES5/igx-stacked-fragment-series-component";
+// import { IgxCategoryXAxisComponent } from "igniteui-angular-charts/ES5/igx-category-x-axis-component";
+// import { IgxCategoryYAxisComponent } from "igniteui-angular-charts/ES5/igx-category-y-axis-component";
+// import { IgxDataChartComponent } from "igniteui-angular-charts/ES5/igx-data-chart-component";
+// import { IgxNumericXAxisComponent } from "igniteui-angular-charts/ES5/igx-numeric-x-axis-component";
+// import { IgxNumericYAxisComponent } from "igniteui-angular-charts/ES5/igx-numeric-y-axis-component";
+// import { IgxPieChartComponent } from "igniteui-angular-charts/ES5/igx-pie-chart-component";
+// import { IgxStackedFragmentSeriesComponent } from "igniteui-angular-charts/ES5/igx-stacked-fragment-series-component";
 
 function applyXAxisOptions(xAxis: any, options: IXAxesOptions) {
     if (options) {
@@ -95,7 +95,7 @@ export class IgxPieChartInitializer extends ChartInitializer {
         super();
     }
 
-    public initChart(chart: IgxPieChartComponent, options?: IChartComponentOptions) {
+    public initChart(chart: any, options?: IChartComponentOptions) {
 
         applyChartOptions(chart, options.chartOptions);
         return chart;
@@ -105,15 +105,15 @@ export class IgxPieChartInitializer extends ChartInitializer {
 export class IgxDataChartInitializer extends ChartInitializer {
     public seriesType: Type<any>;
 
-    constructor(seriesType: Type<any>, xAxis?: IgxNumericXAxisComponent | IgxCategoryXAxisComponent, yAxis?: IgxCategoryYAxisComponent | IgxNumericYAxisComponent) {
+    constructor(seriesType: Type<any>, xAxis?: any , yAxis?: any) {
         super();
 
-        this.xAxis = xAxis ? xAxis : new IgxCategoryXAxisComponent();
-        this.yAxis = yAxis ? yAxis : new IgxNumericYAxisComponent();
+        // this.xAxis = xAxis ? xAxis : new IgxCategoryXAxisComponent();
+        // this.yAxis = yAxis ? yAxis : new IgxNumericYAxisComponent();
         this.seriesType = seriesType;
     }
 
-    public initChart(chart: IgxDataChartComponent, options?: IChartComponentOptions): IgxDataChartComponent {
+    public initChart(chart: any, options?: IChartComponentOptions): any {
         options.seriesOptions.forEach((option) => {
             const series = this.seriesFactory.create(this.seriesType);
             series.xAxis = this.xAxis;
@@ -131,27 +131,27 @@ export class IgxDataChartInitializer extends ChartInitializer {
 }
 
 export class IgxBarDataChartInitializer extends IgxDataChartInitializer {
-    constructor(seriesType: Type<any>, xAxis = new IgxNumericXAxisComponent(), yAxis = new IgxCategoryYAxisComponent()) {
+    constructor(seriesType: Type<any>, xAxis, yAxis) {
         super(seriesType, xAxis, yAxis);
     }
 }
 
 export class IgxScatterChartInitializer extends IgxDataChartInitializer {
-    constructor(seriesType: Type<any>, xAxis = new IgxNumericXAxisComponent(), yAxis = new IgxNumericYAxisComponent()) {
+    constructor(seriesType: Type<any>, xAxis, yAxis) {
         super(seriesType, xAxis, yAxis);
     }
 }
 
 export class IgxStackedDataChartInitializer extends IgxDataChartInitializer {
 
-    public initChart(chart: IgxDataChartComponent, options?: IChartComponentOptions): IgxDataChartComponent {
+    public initChart(chart: any, options?: IChartComponentOptions): any {
         const series = this.seriesFactory.create(this.seriesType);
         series.xAxis = this.xAxis;
         series.yAxis = this.yAxis;
         options.stackedFragmentOptions.forEach(fragOpt => {
-            const frag = new IgxStackedFragmentSeriesComponent();
-            applySeriesOptions(frag, fragOpt);
-            series.series.add(frag);
+            // const frag = new IgxStackedFragmentSeriesComponent();
+            // applySeriesOptions(frag, fragOpt);
+            // series.series.add(frag);
         });
         applySeriesOptions(series, options.seriesOptions);
         applyChartOptions(chart, options.chartOptions);
@@ -165,7 +165,7 @@ export class IgxStackedDataChartInitializer extends IgxDataChartInitializer {
 }
 
 export class IgxStackedBarDataChartInitializer extends IgxStackedDataChartInitializer {
-    constructor(seriesType: Type<any>, xAxis = new IgxNumericXAxisComponent(), yAxis = new IgxCategoryYAxisComponent()) {
+    constructor(seriesType: Type<any>, xAxis, yAxis) {
         super(seriesType, xAxis, yAxis);
     }
 }
