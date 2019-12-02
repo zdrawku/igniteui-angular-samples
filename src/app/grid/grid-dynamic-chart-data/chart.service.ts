@@ -5,7 +5,6 @@ import { IgxBarSeriesComponent } from "igniteui-angular-charts/ES5/igx-bar-serie
 import { IgxBubbleSeriesComponent } from "igniteui-angular-charts/ES5/igx-bubble-series-component";
 import { IgxColumnSeriesComponent } from "igniteui-angular-charts/ES5/igx-column-series-component";
 import { IgxDataChartComponent } from "igniteui-angular-charts/ES5/igx-data-chart-component";
-import { IgxDoughnutChartComponent } from "igniteui-angular-charts/ES5/igx-doughnut-chart-component";
 import { IgxItemLegendComponent } from "igniteui-angular-charts/ES5/igx-item-legend-component";
 import { IgxLegendComponent } from "igniteui-angular-charts/ES5/igx-legend-component";
 import { IgxLineSeriesComponent } from "igniteui-angular-charts/ES5/igx-line-series-component";
@@ -80,13 +79,6 @@ export class ChartService {
       let legendComponentRef;
       let initializer: ChartInitializer;
       switch (chartType) {
-        //    case "doughnut":
-        //         componentFactory =  this.factoryResolver.resolveComponentFactory(IgxDoughnutChartComponent);
-        //         componentRef = viewContainerRef.createComponent(componentFactory);
-        //         itemLegendComponentRef = viewContainerRef.createComponent(itemLegendFactory);
-        //         const doughnutChart = this.initDoughnutChart(componentRef.instance, itemLegendComponentRef.instance);
-        //         this._chart = doughnutChart;
-        //         break;
             case "Pie":
                 componentFactory =  this.factoryResolver.resolveComponentFactory(IgxPieChartComponent);
                 componentRef = viewContainerRef.createComponent(componentFactory);
@@ -217,27 +209,7 @@ export class ChartService {
           });
             chartData.push(temp);
         });
-
+    console.log(chartData);
     return chartData;
   }
-
-//   private initDoughnutChart(chart: IgxDoughnutChartComponent, legend: IgxItemLegendComponent): IgxDoughnutChartComponent {
-//         const valueMemberPaths = Object.keys(this.selectionData[0].selectedData);
-//         // const data = this.getSeriesData(valueMemberPaths);
-//         // data.forEach(dataArray => {
-//         //     const series = new IgxRingSeriesComponent();
-//         //     series.labelMemberPath = this.labelMemberPath;
-//         //     series.dataSource = dataArray.data;
-//         //     series.valueMemberPath = dataArray.valueMemberPath;
-//         //     series.showDefaultTooltip = true;
-//         //     series.formatLabel = (value) =>  "";
-//         //     chart.series.add(series);
-//         // });
-//         chart.width = "85%";
-//         chart.height = "400px";
-//         chart.series.toArray()[0].legend = legend;
-//         chart.series.toArray()[0].labelsPosition = 4;
-//         chart.series.toArray()[0].othersCategoryThreshold = -1;
-//         return chart;
-//   }
 }

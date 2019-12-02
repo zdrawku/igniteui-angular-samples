@@ -58,9 +58,10 @@ import { GridCustomFilteringComponent } from "./grid-custom-filtering/grid-custo
 import { GridCustomKBNavigationComponent } from "./grid-custom-kb-navigation/grid-custom-kb-navigation-sample.component";
 import { GridCustomSummariesSelection } from "./grid-custom-summaries-selection/grid-custom-summaries-selection.component";
 import { GridDisplayDensitySampleComponent } from "./grid-displaydensity-sample/grid-displaydensity-sample.component";
+import { ChartHostDirective, ChartIntegrationDirective } from "./grid-dynamic-chart-data/chart-integration.directive";
 import { ConditionalFormatingDirective } from "./grid-dynamic-chart-data/conditional-formating.directive";
 import { ContextMenuComponent } from "./grid-dynamic-chart-data/context-menu/context-menu.component";
-import { ChartArgsPipe, ChartHostDirective, GridDynamicChartDataComponent } from "./grid-dynamic-chart-data/grid-dynamic-chart-data.component";
+import { ChartArgsPipe, GridDynamicChartDataComponent } from "./grid-dynamic-chart-data/grid-dynamic-chart-data.component";
 import { GridEditingEventsComponent } from "./grid-editing-events/grid-editing-events.component";
 import { GridEditingSampleComponent } from "./grid-editing-sample/grid-editing-sample.component";
 import { GridEditingStyleSample } from "./grid-editing-style-sample/grid-editing-style-sample.component";
@@ -223,7 +224,8 @@ import { DataService } from "./services/data.service";
         ChartHostDirective,
         ChartArgsPipe,
         GridExternalAdvancedFilteringComponent,
-        ConditionalFormatingDirective
+        ConditionalFormatingDirective,
+        ChartIntegrationDirective
     ],
     imports: [
         CommonModule,

@@ -7,12 +7,7 @@ import { ChartService, IGridDataSelection } from "./chart.service";
 import { ConditionalFormatingDirective } from "./conditional-formating.directive";
 import { IChartArgs } from "./context-menu/context-menu.component";
 import { IChartComponentOptions, IChartOptions, IChartSeriesOptions, IXAxesOptions, IYAxesOptions } from "./initializers";
-@Directive({
-    selector: "[chartHost]"
-})
-export class ChartHostDirective {
-    constructor(public viewContainerRef: ViewContainerRef) { }
-}
+import { ChartHostDirective, ChartIntegrationDirective } from './chart-integration.directive';
 
 @Pipe({
     name: "getChartArgs"
@@ -50,6 +45,9 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
     public opened = true;
     @ViewChild(ConditionalFormatingDirective, {read: ConditionalFormatingDirective, static: true})
     public formatting: ConditionalFormatingDirective;
+
+    @ViewChild(ChartIntegrationDirective, {read: ChartIntegrationDirective, static: true})
+    public chartIntegration: ChartIntegrationDirective;
 
     @ViewChild("grid", {read: IgxGridComponent, static: true })
     public grid: IgxGridComponent;
@@ -233,41 +231,36 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
 
             this.zone.runOutsideAngular(() => {
 
-            const chartData = this.grid.getSelectedData()
-                .map(this.dataMap)
-                .filter(r => Object.keys(r).length !== 0);
+            // const chartData = this.grid.getSelectedData()
+            //     .map(this.dataMap)
+            //     .filter(r => Object.keys(r).length !== 0);
+            this.chartIntegration.defaultLabelMemberPath = "Type";
+            this.chartIntegration.range = range;
+            this.chartIntegration.chartData = this.grid.getSelectedData();
+            // if (chartData.length === 0) {
+            //     this.disableCreateChart = true;
+            // } else {
+            //     this.disableCreateChart = false;
+            //     const valueMemberPaths = Object.keys(chartData[0]);
 
-            if (chartData.length === 0) {
-                this.disableCreateChart = true;
-            } else {
-                this.disableCreateChart = false;
-                const valueMemberPaths = Object.keys(chartData[0]);
-
-                if (valueMemberPaths.length === 1) {
-                    switch (valueMemberPaths[0]) {
-                        case "Price":
-                            this.chartsToDisable = {
-                                BubbleScatter: true,
-                                PointScatter: true,
-                                LineScatter: true
-                            };
-                            break;
-                        case "Open Price":
-                            this.chartsToDisable = {
-                                BubbleScatter: true,
-                                PointScatter: false,
-                                LineScatter: false
-                            };
-                            break;
-                    }
-                }
-                this.dataRows = this.grid.filteredSortedData.slice(range.rowStart, range.rowEnd + 1);
-                this.colForSubjectArea = this.grid.visibleColumns[range.columnStart].dataType !== "number" ? this.grid.visibleColumns[range.columnStart].field : this.grid.visibleColumns[1].field;
-
-                for (let i = 0; i < this.dataRows.length; i++) {
-                    this.gridDataSelection.push({ selectedData: chartData[i], subjectArea: this.colForSubjectArea, rowID: this.dataRows[i] });
-                }
-            }
+            //     if (valueMemberPaths.length === 1) {
+            //         switch (valueMemberPaths[0]) {
+            //             case "Price":
+            //                 this.chartsToDisable = {
+            //                     BubbleScatter: true,
+            //                     PointScatter: true,
+            //                     LineScatter: true
+            //                 };
+            //                 break;
+            //             case "Open Price":
+            //                 this.chartsToDisable = {
+            //                     BubbleScatter: true,
+            //                     PointScatter: false,
+            //                     LineScatter: false
+            //                 };
+            //                 break;
+            //         }
+            //     }
             this.range = range;
             this.tabs.tabs.first.isSelected = true;
             if (JSON.stringify(this.formatting.range) !== JSON.stringify(range)) {
@@ -300,26 +293,6 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
         chartType: "Pie",
         seriesType: undefined
     };
-
-    private dataMap(dataRecord: any) {
-        Object.keys(dataRecord).forEach(k => {
-            switch (k) {
-                case "Price":
-                case "Open Price":
-                case "Buy":
-                case "Sell":
-                case "Start(Y)":
-                case "High(Y)":
-                case "Low(Y)":
-                case "High(D)":
-                case "Low(D)":
-                    break;
-                default:
-                    delete dataRecord[k];
-            }
-        });
-        return dataRecord;
-    }
 
     public toggleChartSelectionDialog(event) {
 
@@ -416,7 +389,7 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
 
         chartHost.viewContainerRef.clear();
         requestAnimationFrame(() => {
-            this.currentChart = this.chartService.chartFactory(args.chartType, this.gridDataSelection, chartHost.viewContainerRef, this.chartComponentOptions, { seriesModel: seriesOptionModel, seriesType: args.seriesType });
+            this.currentChart = this.chartIntegration.chartFactory(args.chartType, chartHost.viewContainerRef, this.chartComponentOptions, { seriesModel: seriesOptionModel, seriesType: args.seriesType });
             if (dialogToOpen.isCollapsed) {
                 dialogOverlaySettings.outlet = this.outlet;
                 dialogToOpen.open(overlaySettings);

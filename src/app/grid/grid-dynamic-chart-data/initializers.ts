@@ -11,7 +11,11 @@ import { IgxStackedFragmentSeriesComponent } from "igniteui-angular-charts/ES5/i
 function applyXAxisOptions(xAxis: any, options: IXAxesOptions) {
     if (options) {
         Object.keys(options).forEach(key => {
-            xAxis[key] = options[key];
+            if (xAxis[key] instanceof EventEmitter) {
+                xAxis[key].subscribe(options[key]);
+            } else {
+                xAxis[key] = options[key];
+            }
         });
     }
 }
@@ -19,7 +23,11 @@ function applyXAxisOptions(xAxis: any, options: IXAxesOptions) {
 function applyYAxisOptions(yAxis: any, options: IYAxesOptions) {
     if (options) {
         Object.keys(options).forEach(key => {
-            yAxis[key] = options[key];
+            if (yAxis[key] instanceof EventEmitter) {
+                yAxis[key].subscribe(options[key]);
+            } else {
+                yAxis[key] = options[key];
+            }
         });
     }
 }
