@@ -41,6 +41,8 @@ $button-theme: igx-button-theme(
     }
 
     .slide-content-wrapper{
+        display: flex;
+        flex-flow: column;
         .signInForm {
             margin-bottom: 1rem;
             margin: 10px auto;

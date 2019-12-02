@@ -29,9 +29,20 @@
                         <input igxInput id="password" type="password" />
                     </igx-input-group>
                 </form>
-                <button igxButton="raised" type="submit" (click)="form.reset()">Sign Up</button>
+                <button style="margin: 0 auto" igxButton="raised" type="submit" (click)="form.reset()">Sign Up</button>
             </div>
         </igx-slide>
+        <ng-template igxCarouselNextButton let-disabled>
+            <button igxButton="fab" igxRipple="white" [disabled]="disabled">
+                    <igx-icon fontSet="material">add</igx-icon>
+            </button>
+    </ng-template>
+  
+    <ng-template igxCarouselPrevButton let-disabled>
+            <button igxButton="fab" igxRipple="white" [disabled]="disabled">
+                    <igx-icon fontSet="material">remove</igx-icon>
+            </button>
+    </ng-template>
         <ng-template igxCarouselIndicator let-slide>
             <div [ngClass]="{'selected': slide.current === current}" class="indicator"></div>
         </ng-template>
