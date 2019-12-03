@@ -1,9 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { IGridDataSelection } from "../chart.service";
-export interface IChartArgs {
-    chartType: string;
-    seriesType: string;
-}
 @Component({
   selector: "context-menu",
   templateUrl: "./context-menu.component.html",
@@ -43,7 +39,7 @@ export class ContextMenuComponent {
     public multiSelection: boolean;
 
     @Output()
-    public onChartSelected = new  EventEmitter<IChartArgs>();
+    public onChartSelected = new  EventEmitter<any>();
 
     constructor() { }
 

@@ -1,5 +1,5 @@
 // tslint:disable: max-line-length
-import { ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, Inject, NgZone, Type, ViewContainerRef } from "@angular/core";
+import { ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, EventEmitter, Inject, Input, NgZone, Output, Type, ViewContainerRef } from "@angular/core";
 import { IgxGridComponent } from "igniteui-angular";
 import { IgxAreaSeriesComponent } from "igniteui-angular-charts/ES5/igx-area-series-component";
 import { IgxBarSeriesComponent } from "igniteui-angular-charts/ES5/igx-bar-series-component";
@@ -20,9 +20,16 @@ import { IgxStackedAreaSeriesComponent } from "igniteui-angular-charts/ES5/igx-s
 import { IgxStackedBarSeriesComponent } from "igniteui-angular-charts/ES5/igx-stacked-bar-series-component";
 import { IgxStackedColumnSeriesComponent } from "igniteui-angular-charts/ES5/igx-stacked-column-series-component";
 import { IgxStackedLineSeriesComponent } from "igniteui-angular-charts/ES5/igx-stacked-line-series-component";
-import { IGridDataSelection } from "./chart.service";
-import { ChartInitializer, IChartComponentOptions, IChartSeriesOptions, IgxBarDataChartInitializer, IgxDataChartInitializer, IgxPieChartInitializer, IgxScatterChartInitializer, IgxStackedBarDataChartInitializer, IgxStackedDataChartInitializer, IStackedFragmentOptions } from "./initializers";
-import { GridSelectionRange } from 'igniteui-angular/lib/grids/selection/selection.service';
+import { ChartInitializer,
+         IChartComponentOptions,
+         IChartSeriesOptions,
+         IgxBarDataChartInitializer,
+         IgxDataChartInitializer,
+         IgxPieChartInitializer,
+         IgxScatterChartInitializer,
+         IgxStackedBarDataChartInitializer,
+         IgxStackedDataChartInitializer,
+         IStackedFragmentOptions } from "./initializers";
 @Directive({
     selector: "[chartHost]"
 })
@@ -35,13 +42,46 @@ export class ChartHostDirective {
 })
 export class ChartIntegrationDirective {
 
-    public dataChartSeries = new Map<string, Type<any>>();
-    public scatterChartSeries = new Map<string, Type<any>>();
-    public labelMemberPath: string;
-    private selectionData: IGridDataSelection[];
-    private _chart;
+    public get chartData() {
+        return this._chartData;
+    }
 
-    constructor(@Inject(IgxGridComponent) private grid, private factoryResolver: ComponentFactoryResolver, private zone: NgZone) {
+    public set chartData(selectedData: any[]) {
+        const dataModel = selectedData[0];
+        this.labelMemberPaths = Object.keys(dataModel).filter(key => typeof dataModel[key] === "string");
+        this.valueMemberPaths = Object.keys(dataModel).filter(key => typeof dataModel[key] === "number");
+        this.selectedRows = this.grid.filteredSortedData.slice(this.range.rowStart, this.range.rowEnd + 1);
+        this._chartData = selectedData;
+        if (this.labelMemberPaths.length !== 0) {
+            this.labelMemberPath = this.labelMemberPaths[0];
+        } else if (this.defaultLabelMemberPath !== "") {
+            this.labelMemberPath = this.defaultLabelMemberPath;
+            this._chartData = selectedData.map((dataRecord, index) => this.addMemberPath(dataRecord, this.selectedRows[index], this.labelMemberPath));
+        } else {
+            this.labelMemberPath  = undefined;
+        }
+    }
+
+    @Output()
+    public onChartTypesDetermined = new EventEmitter<string[]>();
+
+    public range;
+
+    @Input()
+    public defaultLabelMemberPath: string = "";
+
+    private labelMemberPath: string;
+    private selectedRows;
+    private _chart;
+    private dataChartSeries = new Map<string, Type<any>>();
+    private scatterChartSeries = new Map<string, Type<any>>();
+    private labelMemberPaths = [];
+    private valueMemberPaths = [];
+    private _chartData;
+    private _scatterChartTypes = [];
+    private _dataChartTypes = [];
+    constructor(@Inject(IgxGridComponent) private grid: IgxGridComponent, private factoryResolver: ComponentFactoryResolver, private zone: NgZone) {
+        let iterable;
         this.dataChartSeries.set("ColumnGrouped", IgxColumnSeriesComponent);
         this.dataChartSeries.set("AreaGrouped", IgxAreaSeriesComponent);
         this.dataChartSeries.set("LineGrouped", IgxLineSeriesComponent);
@@ -60,6 +100,15 @@ export class ChartIntegrationDirective {
         this.scatterChartSeries.set("ScatterPoint", IgxScatterSeriesComponent);
         this.scatterChartSeries.set("ScatterBubble", IgxBubbleSeriesComponent);
         this.scatterChartSeries.set("ScatterLine", IgxScatterLineSeriesComponent);
+
+        iterable = this.dataChartSeries.keys();
+        for (let head = iterable.next().value; head !== undefined; head = iterable.next().value) {
+            this._dataChartTypes.push(head);
+        }
+        iterable = this.scatterChartSeries.keys();
+        for (let head = iterable.next().value; head !== undefined; head = iterable.next().value) {
+            this._scatterChartTypes.push(head);
+        }
     }
 
     public chartFactory(chartType: string, viewContainerRef: ViewContainerRef, options: IChartComponentOptions, seriesInfo?: { seriesType?: string, seriesModel?: IChartSeriesOptions }) {
@@ -142,7 +191,11 @@ export class ChartIntegrationDirective {
     private addPieChartDataOptions(options: IChartComponentOptions) {
         options.chartOptions["dataSource"] = this.chartData;
         options.chartOptions["valueMemberPath"] = this.valueMemberPaths[0];
-        options.chartOptions["labelMemberPath"] = this.labelMemberPath;
+        if (!this.labelMemberPath) {
+            options.chartOptions["labelMemberPath"] = this.valueMemberPaths[0];
+        } else {
+            options.chartOptions["labelMemberPath"] = this.valueMemberPaths[0];
+        }
     }
 
     private addDataChartDataOptions(options: IChartComponentOptions, stacked: boolean, model?: IChartSeriesOptions) {
@@ -167,6 +220,7 @@ export class ChartIntegrationDirective {
             options.seriesOptions = seriesOptions;
         }
     }
+
     private addScatterChartDataOptions(options: IChartComponentOptions, model?: IChartSeriesOptions) {
         const dataSubjects = new Set(this.valueMemberPaths);
         dataSubjects.add(model["yMemberPath"]);
@@ -188,35 +242,9 @@ export class ChartIntegrationDirective {
         }
     }
 
-    // tslint:disable: member-ordering
-    private labelMemberPaths = [];
-    private valueMemberPaths = [];
-    private _chartData;
-    private selectedRows;
-    public range: GridSelectionRange;
-    public defaultLabelMemberPath: string;
-    public get chartData() {
-        return this._chartData;
-    }
-    public set chartData(selectedData: any[]) {
-        const dataModel = selectedData[0];
-        this.labelMemberPaths = Object.keys(dataModel).filter(key => typeof dataModel[key] === "string");
-        this.valueMemberPaths = Object.keys(dataModel).filter(key => typeof dataModel[key] === "number");
-
-        if (this.labelMemberPaths.length === 0) {
-            this.labelMemberPath = this.defaultLabelMemberPath;
-            this.selectedRows = this.grid.filteredSortedData.slice(this.range.rowStart, this.range.rowEnd + 1);
-            this._chartData = selectedData.map((dataRecord, index) => this.addMemberPath(dataRecord, this.selectedRows[index], this.labelMemberPath));
-        } else {
-            this.labelMemberPath = this.labelMemberPaths[0];
-            this._chartData = selectedData;
-        }
-
-    }
-
     private addMemberPath(dataRecord, selectedRow, ...paths) {
         paths.forEach(path => {
-            dataRecord = {...{[path]: selectedRow[path]}, ...dataRecord};
+            dataRecord = { ...{ [path]: selectedRow[path] }, ...dataRecord };
         });
         return dataRecord;
     }

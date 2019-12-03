@@ -27,6 +27,14 @@
 }
 
 :host ::ng-deep {
+    .chart-item{
+        width: 40%;
+        padding: 10px;
+        cursor: pointer;
+        &.selected{
+            background: igx-color($default-palette, 'grays', 300);
+        }
+    }
 
     @include igx-fluent-theme($fluent-excel-palette);
     @include scrollbar-love();

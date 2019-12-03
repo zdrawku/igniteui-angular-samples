@@ -103,7 +103,7 @@
     </div>
 </div>
  <div class="selection-area">
-    <div class="chart-area" [ngClass]="{'expanded': chartCondigAreaState === 'closed'}">
+    <div class="chart-area" [ngClass]="{'expanded': chartConfigAreaState === 'closed'}">
         <ng-template #chart chartHost></ng-template>
     </div>
     <span>
@@ -111,7 +111,7 @@
             <igx-icon fontSet="material">chevron_{{ opened ? 'right': 'left'}}</igx-icon>
         </button>
     </span>
-    <div #configArea class="chart-config-area {{chartCondigAreaState}}">
+    <div #configArea class="chart-config-area {{chartConfigAreaState}}">
         <div class="config-area-header">
             <span style="font-weight: bold;">Chart Types</span>
         </div>
@@ -120,8 +120,8 @@
             <div >{{chartType | titlecase}}</div>
             <div class="types-section">
                 <div 
-                        (click)="createChart(chart, chartHost, chartDialog, chartDialog)" [ngClass]="{'disableButton': chartsToDisable[chart.seriesType + chart.chartType]}"
-                        *ngFor="let chart of (chartType | getChartArgs); trackBy: trackByFn" style="width: 40%;margin-right: 5px; cursor: pointer;">
+                        (click)="createChart(chart, chartHost, chartDialog, chartDialog)" [ngClass]="{'selected':chart.chartType === currentChartArg.chartType && chart.seriesType === currentChartArg.seriesType}"
+                        *ngFor="let chart of (chartType | getChartArgs); trackBy: trackByFn" class="chart-item">
                             <img src="assets/images/svg/charts/{{chart.seriesType}}{{chart.chartType}}.svg"/>    
             </div>
             </div>
@@ -130,7 +130,7 @@
         <div class="wrapper" >
             <div style="text-align: centre;">{{'pie' | titlecase}}</div>
             <div style="text-align: center">
-                <div  style="width: 50%; cursor: pointer;" (click)="createChart(pieChartArgs, chartHost, chartDialog, chartDialog)"><img src="assets/images/svg/charts/Pie.svg"></div>
+                <div  class="chart-item" [ngClass]="{'selected': !currentChartArg.seriesType}" style="width: 50%; cursor: pointer;" (click)="createChart(pieChartArgs, chartHost, chartDialog, chartDialog)"><img src="assets/images/svg/charts/Pie.svg"></div>
             </div>
         </div>  
     </div>
