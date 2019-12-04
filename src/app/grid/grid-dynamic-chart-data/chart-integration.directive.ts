@@ -49,7 +49,6 @@ export class ChartIntegrationDirective {
 
     public set chartData(selectedData: any[]) {
         const dataModel = selectedData[0];
-        console.log(selectedData)
         this.labelMemberPaths = Object.keys(dataModel).filter(key => typeof dataModel[key] === "string");
         this.valueMemberPaths = Object.keys(dataModel).filter(key => typeof dataModel[key] === "number");
         this.selectedRows = this.grid.filteredSortedData.slice(this.range.rowStart, this.range.rowEnd + 1);
