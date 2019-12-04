@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { IGridDataSelection } from "../chart.service";
 @Component({
   selector: "context-menu",
   templateUrl: "./context-menu.component.html",
