@@ -8,7 +8,7 @@ import {
     IgxChipsModule, IgxColumnHidingModule, IgxComboModule, IgxCsvExporterService, IgxDatePickerModule,
     IgxDialogModule, IgxDividerModule, IgxExcelExporterService, IgxExpansionPanelModule, IgxFocusModule, IgxGridModule,
     IgxIconModule, IgxInputGroupModule, IgxProgressBarModule, IgxRadioModule, IgxRippleModule, IgxSelectModule, IgxSliderModule, IgxSnackbarModule,
-    IgxSwitchModule, IgxTabsModule, IgxToastModule, IgxToggleModule, IgxTooltipModule
+    IgxSwitchModule, IgxTabsModule, IgxToastModule, IgxToggleModule, IgxTooltipModule, IgxCarouselModule
 } from "igniteui-angular";
 import { IgxBarSeriesModule} from "igniteui-angular-charts/ES5/igx-bar-series-module";
 import { IgxBollingerBandsOverlayModule } from "igniteui-angular-charts/ES5/igx-bollinger-bands-overlay-module";
@@ -279,7 +279,8 @@ import { DataService } from "./services/data.service";
         IgxCardModule,
         IgxDividerModule,
         IgxDataChartScatterModule,
-        IgxBarSeriesModule
+        IgxBarSeriesModule,
+        IgxCarouselModule
     ],
     providers: [
         DataService,

@@ -162,10 +162,7 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
             this.chartIntegration.chartData = this.grid.getSelectedData();
             this.range = range;
             this.tabs.tabs.first.isSelected = true;
-            if (JSON.stringify(this.formatting.range) !== JSON.stringify(range)) {
-                this.formatting.clearFormatting();
-                this.formatting.range = range;
-             }
+            this.formatting.range = range;
         });
 
             this.renderButton();
