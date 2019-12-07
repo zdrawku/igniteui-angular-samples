@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, EventEmitter, Inject, Input, NgZone, Output } from "@angular/core";
 import { IgxColumnComponent, IgxGridComponent } from "igniteui-angular";
 import { GridSelectionRange } from "igniteui-angular/lib/grids/selection/selection.service";
-import { RangeCache, StyleFormatType, IRangeData } from "./range-cache";
+import { IRangeData, RangeCache, StyleFormatType } from "./range-cache";
 
 @Directive({
     selector: "[conditionalFormating]"
@@ -58,47 +58,74 @@ export class ConditionalFormatingDirective {
     public onFormattersReady = new EventEmitter<string[]>();
 
     public colorScale = {
-        backgroundColor: (rowData, colname, cellValue, rowIndex) => {
-           const range = this.getRange(rowIndex, colname);
-           if (range && range !== JSON.stringify(this._currentRange)) {
-                return this.returnCachedStyle(this.rangesCache.getStyle(range), rowData, colname, cellValue, rowIndex);
-           }
-           if (range) {
-            return this.rangeLowTresholdValue(range) >= cellValue ?  this._errorColor :
-                   this.rangeMiddleTresholdValue(range) >= cellValue ? this._warningColor : this._successColor;
-           }
+        name: "colorScale",
+        value: {
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (range && this.checkIfRangeHasDataBars(range)) {
+                    return "";
+                }
+                if (range && this.rangesCache.getStyle(range).name !== "colorScale") {
+                    return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
+                }
+                if (range) {
+                    return this.rangeLowTresholdValue(range) >= cellValue ? this._errorColor :
+                        this.rangeMiddleTresholdValue(range) >= cellValue ? this._warningColor : this._successColor;
+                }
+            }
         }
     };
 
     public dataBars = {
-        backgroundImage: (rowData, colname, cellValue, rowIndex) => {
-            const range = this.getRange(rowIndex, colname);
-            if (range) {
-            return `linear-gradient(90deg, rgb(0, 194, 255) ${this.getPercentage(cellValue, this.getRangeMaxValue(range))}%, transparent 0%)`;
-           }
-        },
-        backgroundSize: "90% 70%",
-        backgroundRepeat: "no-repeat",
-        backgroundPositionY: "center"
+        name: "dataBars",
+        value: {
+            backgroundImage: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (range && !this.checkIfRangeHasDataBars(range)) {
+                    return "";
+                }
+                if (range) {
+                    return `linear-gradient(90deg, rgb(0, 194, 255) ${this.getPercentage(cellValue, this.getRangeMaxValue(range))}%, transparent 0%)`;
+                }
+            },
+            backgroundSize: "90% 70%",
+            backgroundRepeat: "no-repeat",
+            backgroundPositionY: "center",
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (range && !this.checkIfRangeHasDataBars(range)) {
+                    return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
+                }
+            }
+        }
     };
 
     public top10Percent = {
-        backgroundColor: (rowData, colname, cellValue, rowIndex) => {
-            const range = this.getRange(rowIndex, colname);
-            if (range && cellValue > this.top10PercentTreshold(range)) {
-             return this._top10Color;
+        name: "top10Percent",
+        value: {
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (range && this.checkIfRangeHasDataBars(range)) {
+                    return "";
+                }
+                if (range && this.rangesCache.getStyle(range).name !== "top10Percent") {
+                    return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
+                }
+                if (range) {
+                    return cellValue > this.top10PercentTreshold(range) ? this._top10Color : "rgb(255, 0, 0)";
+                }
             }
         }
     };
 
-    public greaterThanAverage = {
-        backgroundColor: (rowData, colname, cellValue, rowIndex) => {
-            const range = this.getRange(rowIndex, colname);
-            if (range && cellValue >= this.getAvgValue(range)) {
-                return this._averageColor;
-            }
-        }
-    };
+    // public greaterThanAverage = {
+    //     backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+    //         const range = this.getRange(rowIndex, colname);
+    //         if (range && cellValue >= this.getAvgValue(range)) {
+    //             return this._averageColor;
+    //         }
+    //     }
+    // };
 
     // public empty = {
     //     backgroundColor: (rowData, colname, cellValue, rowIndex) => {
@@ -159,7 +186,36 @@ export class ConditionalFormatingDirective {
 
     private _formattersData = new Map<string, any>();
 
+    private propertiesForCellsWithDataBarsStyle = {
+        backgroundImage: (rowData, colname, cellValue, rowIndex) => {
+            const range = this.getRange(rowIndex, colname);
+            if (range && this.checkIfRangeHasDataBars(range)) {
+                return `linear-gradient(90deg, rgb(0, 194, 255) ${this.getPercentage(cellValue, this.getRangeMaxValue(range))}%, transparent 0%)`;
+            }
+        },
+        backgroundSize: (rowData, colname, cellValue, rowIndex) => {
+            const range = this.getRange(rowIndex, colname);
+            if (range && this.checkIfRangeHasDataBars(range)) {
+                return "90% 70%";
+            }
+        },
+        backgroundRepeat: (rowData, colname, cellValue, rowIndex) => {
+            const range = this.getRange(rowIndex, colname);
+            if (range && this.checkIfRangeHasDataBars(range)) {
+                return "no-repeat";
+            }
+        },
+        backgroundPositionY: (rowData, colname, cellValue, rowIndex) => {
+            const range = this.getRange(rowIndex, colname);
+            if (range && this.checkIfRangeHasDataBars(range)) {
+                return "center";
+            }
+        }
+    };
+
     constructor(@Inject(IgxGridComponent) public grid: IgxGridComponent, private zone: NgZone) {
+        this.colorScale.value = { ...this.colorScale.value, ...this.propertiesForCellsWithDataBarsStyle };
+        this.top10Percent.value = { ...this.top10Percent.value, ...this.propertiesForCellsWithDataBarsStyle };
         this._formattersData.set("Data Bars", this.dataBars);
         // this._formattersData.set("Greater Than", this.greaterThanAverate);
         this._formattersData.set("Top 10%", this.top10Percent);
@@ -177,9 +233,9 @@ export class ConditionalFormatingDirective {
         const formatType = this._numericFormatters.indexOf(formatterName) !== -1 ? StyleFormatType.NUMERIC :
             this._textFormatters.indexOf(formatterName) !== - 1 ? StyleFormatType.TEXT : StyleFormatType.COMPOSITE;
         this.grid.visibleColumns.forEach(c => {
-                    if (c.visibleIndex >= this._currentRange.columnStart && c.visibleIndex <= this._currentRange.columnEnd) {
-                        this.applyFormatting(c, formatType, formatter);
-                    }
+            if (c.visibleIndex >= this._currentRange.columnStart && c.visibleIndex <= this._currentRange.columnEnd) {
+                this.applyFormatting(c, formatType, formatter);
+            }
         });
     }
 
@@ -198,9 +254,9 @@ export class ConditionalFormatingDirective {
     private applyFormatting(column: IgxColumnComponent, type: StyleFormatType, formatter: any) {
         if ((column.dataType as string) === (type as string) || type === StyleFormatType.COMPOSITE) {
             if (!this.rangesCache.hasRangeStyle(JSON.stringify(this._currentRange))) {
-                 this.rangesCache.addStyleToRange(JSON.stringify(this._currentRange), formatter);
+                this.rangesCache.addStyleToRange(JSON.stringify(this._currentRange), formatter);
             }
-            column.cellStyles = {...formatter};
+            column.cellStyles = { ...formatter.value };
             this.grid.notifyChanges();
         }
     }
@@ -213,7 +269,7 @@ export class ConditionalFormatingDirective {
         return this.rangesCache.getRangeMaxValue(range);
     }
     private getRange(rowIndex, columnName) {
-        const colIndex = this.grid.visibleColumns.find(c =>  c.field === columnName).visibleIndex;
+        const colIndex = this.grid.visibleColumns.find(c => c.field === columnName).visibleIndex;
         return this.rangesCache.getCellRange(rowIndex, colIndex);
     }
 
@@ -237,14 +293,16 @@ export class ConditionalFormatingDirective {
     }
 
     private getPercentage(of, from) {
-        return (Math.ceil(of) / Math.ceil(from)) * 100;
+        const res = (Math.ceil(of) / Math.ceil(from)) * 100;
+        return res < 1 ? 1 : res;
     }
 
     private returnCachedStyle(style, rowData, colname, cellValue, rowIndex) {
-         Object.keys(style).forEach(k =>  {
-            if (typeof style[k] === "function") {
-                return style[k](rowData, colname, cellValue, rowIndex);
-            }
-        });
+        return style["backgroundColor"](rowData, colname, cellValue, rowIndex);
+
+    }
+
+    private checkIfRangeHasDataBars(range): boolean {
+        return this.rangesCache.getStyle(range).name === "dataBars";
     }
 }
