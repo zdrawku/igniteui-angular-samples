@@ -220,8 +220,13 @@ export class GridDynamicChartDataComponent implements OnInit, AfterViewInit {
     }
 
     public formattersNames = [];
+
     public analyse(type) {
         this.formatting.formatCells(type);
+    }
+
+    public clearFormatting() {
+        this.formatting.clearFormatting();
     }
 
     public rightClick(eventArgs: any) {

@@ -62,7 +62,7 @@ export class ConditionalFormatingDirective {
         value: {
             backgroundColor: (rowData, colname, cellValue, rowIndex) => {
                 const range = this.getRange(rowIndex, colname);
-                if (range && this.checkIfRangeHasDataBars(range)) {
+                if (!range || this.checkIfRangeHasDataBars(range)) {
                     return "";
                 }
                 if (range && this.rangesCache.getStyle(range).name !== "colorScale") {
@@ -105,7 +105,7 @@ export class ConditionalFormatingDirective {
         value: {
             backgroundColor: (rowData, colname, cellValue, rowIndex) => {
                 const range = this.getRange(rowIndex, colname);
-                if (range && this.checkIfRangeHasDataBars(range)) {
+                if (!range || this.checkIfRangeHasDataBars(range)) {
                     return "";
                 }
                 if (range && this.rangesCache.getStyle(range).name !== "top10Percent") {
@@ -123,7 +123,7 @@ export class ConditionalFormatingDirective {
         value: {
             backgroundColor: (rowData, colname, cellValue, rowIndex) => {
                 const range = this.getRange(rowIndex, colname);
-                if (range && this.checkIfRangeHasDataBars(range)) {
+                if (!range || this.checkIfRangeHasDataBars(range)) {
                     return "";
                 }
                 if (range && this.rangesCache.getStyle(range).name !== "greaterThanAverage") {
@@ -159,7 +159,7 @@ export class ConditionalFormatingDirective {
         value: {
             backgroundColor: (rowData, colname, cellValue, rowIndex) => {
                 const range = this.getRange(rowIndex, colname);
-                if (range && this.checkIfRangeHasDataBars(range)) {
+                if (!range || this.checkIfRangeHasDataBars(range)) {
                     return "";
                 }
                 if (range && this.rangesCache.getStyle(range).name !== "duplicateValues") {
@@ -210,6 +210,18 @@ export class ConditionalFormatingDirective {
                     return this._warningColor;
                 }
             }
+        }
+    };
+
+    public deleteFormatting = {
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (!range || JSON.stringify(this._currentRange) === range) {
+                    return "";
+                }
+                if (range && !this.checkIfRangeHasDataBars(range)) {
+                    return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
+                }
         }
     };
 
@@ -276,6 +288,7 @@ export class ConditionalFormatingDirective {
         this._formattersData.set("Unique Values", this.uniques);
         this._formattersData.set("Empty Values", this.empty);
 
+        this.deleteFormatting =  { ...this.deleteFormatting, ...this.propertiesForCellsWithDataBarsStyle };
     }
 
     public formatCells(formatterName) {
@@ -291,15 +304,16 @@ export class ConditionalFormatingDirective {
     }
 
     public clearFormatting() {
-        this.grid.visibleColumns.forEach(c => {
-            c.cellStyles = null;
+        if (this._currentRange) {
+            this.grid.visibleColumns.forEach(c => {
+                if (c.visibleIndex >= this._currentRange.columnStart && c.visibleIndex <= this._currentRange.columnEnd) {
+                    c.cellStyles = this.deleteFormatting;
+                }
+            });
+            this.rangesCache.removeRange(this._currentRange);
+            console.log(this.rangesCache);
             this.grid.notifyChanges();
-        });
-    }
-
-    public removeFormatting(column) {
-        column.cellStyles = null;
-        this.grid.notifyChanges();
+        }
     }
 
     private applyFormatting(column: IgxColumnComponent, type: StyleFormatType, formatter: any) {
