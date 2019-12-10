@@ -68,7 +68,7 @@ export class ConditionalFormatingDirective {
                 if (range && this.rangesCache.getStyle(range).name !== "colorScale") {
                     return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
                 }
-                if (range) {
+                if (range && typeof cellValue === "number") {
                     return this.rangeLowTresholdValue(range) >= cellValue ? this._errorColor :
                         this.rangeMiddleTresholdValue(range) >= cellValue ? this._warningColor : this._successColor;
                 }
@@ -84,7 +84,7 @@ export class ConditionalFormatingDirective {
                 if (range && !this.checkIfRangeHasDataBars(range)) {
                     return "";
                 }
-                if (range) {
+                if (range && typeof cellValue === "number") {
                     return `linear-gradient(90deg, rgb(0, 194, 255) ${this.getPercentage(cellValue, this.getRangeMaxValue(range))}%, transparent 0%)`;
                 }
             },
@@ -111,61 +111,107 @@ export class ConditionalFormatingDirective {
                 if (range && this.rangesCache.getStyle(range).name !== "top10Percent") {
                     return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
                 }
-                if (range) {
+                if (range && typeof cellValue === "number") {
                     return cellValue > this.top10PercentTreshold(range) ? this._top10Color : "rgb(255, 0, 0)";
                 }
             }
         }
     };
 
-    // public greaterThanAverage = {
-    //     backgroundColor: (rowData, colname, cellValue, rowIndex) => {
-    //         const range = this.getRange(rowIndex, colname);
-    //         if (range && cellValue >= this.getAvgValue(range)) {
-    //             return this._averageColor;
-    //         }
-    //     }
-    // };
+    public greaterThanAverage =
+    {   name: "greaterThanAverage",
+        value: {
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (range && this.checkIfRangeHasDataBars(range)) {
+                    return "";
+                }
+                if (range && this.rangesCache.getStyle(range).name !== "greaterThanAverage") {
+                    return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
+                }
+                if (range && typeof cellValue === "number") {
+                    return cellValue > this.getAvgValue(range) ? this._averageColor : "rgba(255, 0, 0, .4)";
+                }
+            }
+        }
+    };
 
-    // public empty = {
-    //     backgroundColor: (rowData, colname, cellValue, rowIndex) => {
-    //         if (this.isCellWithinARange(rowIndex, colname) && cellValue === undefined) {
-    //             return this._errorColor;
-    //         }
-    //     }
-    // };
+    public empty = {
+        name: "emptyValues",
+        value: {
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+            const range = this.getRange(rowIndex, colname);
+            if (range && this.checkIfRangeHasDataBars(range)) {
+                return "";
+            }
+            if (range && this.rangesCache.getStyle(range).name !== "emptyValues") {
+                return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
+            }
+            if (range && cellValue === undefined) {
+                return this._errorColor;
+            }
+        }
+    }
+    };
 
-    // public duplicates = {
-    //     backgroundColor: (rowData, colname, cellValue, rowIndex) => {
-    //         if (this.isCellWithinARange(rowIndex, colname)) {
-    //             const color = this.zone.runOutsideAngular(() => {
-    //                 const arr: any[] = typeof cellValue === "number" ? this._numericData : this._textData;
-    //                 return arr.indexOf(cellValue) !== arr.lastIndexOf(cellValue) ? this._warningColor : "";
-    //             });
-    //             return color;
-    //         }
-    //     }
-    // };
+    public duplicates = {
+        name: "duplicateValues",
+        value: {
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (range && this.checkIfRangeHasDataBars(range)) {
+                    return "";
+                }
+                if (range && this.rangesCache.getStyle(range).name !== "duplicateValues") {
+                    return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
+                }
+                if (range) {
+                    const color = this.zone.runOutsideAngular(() => {
+                        const arr: any[] = typeof cellValue === "number" ? this.rangeNumericData(range) : this.rangeTextData(range);
+                        return arr.indexOf(cellValue) !== arr.lastIndexOf(cellValue) ? this._warningColor : "rgba(255,19,74, .4)";
+                    });
+                    return color;
+                }
+            }
+        }
+    };
 
-    // public textContains = {
-    //     backgroundColor: (rowData, colname, cellValue, rowIndex) => {
-    //         if (this.isWithingRange(rowIndex) && cellValue.toLowerCase().indexOf(this._valueForComparison.toLowerCase()) !== -1) {
-    //             return this._warningColor;
-    //         }
-    //     }
-    // };
+    public uniques = {
+        name: "uniqueValues",
+        value: {
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (range && this.checkIfRangeHasDataBars(range)) {
+                    return "";
+                }
+                if (range && this.rangesCache.getStyle(range).name !== "uniqueValues") {
+                    return this.returnCachedStyle(this.rangesCache.getStyle(range).value, rowData, colname, cellValue, rowIndex);
+                }
+                if (range) {
+                    const color = this.zone.runOutsideAngular(() => {
+                        const arr: any[] = typeof cellValue === "number" ? this.rangeNumericData(range) : this.rangeTextData(range);
+                        return arr.indexOf(cellValue) === arr.lastIndexOf(cellValue) ? this._warningColor : "rgba(255,19,74, .4)";
+                    });
+                    return color;
+                }
+            }
+        }
+    };
 
-    // public uniques = {
-    //     backgroundColor: (rowData, colname, cellValue, rowIndex) => {
-    //         if (this.isWithingRange(rowIndex)) {
-    //             const color = this.zone.runOutsideAngular(() => {
-    //                 const arr: any[] = typeof cellValue === "number" ? this._numericData : this._textData;
-    //                 return arr.indexOf(cellValue) === arr.lastIndexOf(cellValue) ? this._warningColor : "";
-    //             });
-    //             return color;
-    //         }
-    //     }
-    // };
+    public textContains = {
+        name: "textContains",
+        value: {
+            backgroundColor: (rowData, colname, cellValue, rowIndex) => {
+                const range = this.getRange(rowIndex, colname);
+                if (!range || this.checkIfRangeHasDataBars(range) || this.rangesCache.getStyle(range).name !== "textContains") {
+                    return;
+                }
+                if (typeof cellValue === "string" && cellValue.toLowerCase().indexOf(this.getValueForComparison(range).toLowerCase()) !== -1) {
+                    return this._warningColor;
+                }
+            }
+        }
+    };
 
     private _successColor = "rgba(78, 184, 98, .7)";
     private _warningColor = "rgba(251,177,60, .7)";
@@ -216,14 +262,19 @@ export class ConditionalFormatingDirective {
     constructor(@Inject(IgxGridComponent) public grid: IgxGridComponent, private zone: NgZone) {
         this.colorScale.value = { ...this.colorScale.value, ...this.propertiesForCellsWithDataBarsStyle };
         this.top10Percent.value = { ...this.top10Percent.value, ...this.propertiesForCellsWithDataBarsStyle };
+        this.greaterThanAverage.value = { ...this.greaterThanAverage.value, ...this.propertiesForCellsWithDataBarsStyle };
+        this.textContains.value = { ...this.textContains.value, ...this.propertiesForCellsWithDataBarsStyle };
+        this.duplicates.value = { ...this.duplicates.value, ...this.propertiesForCellsWithDataBarsStyle };
+        this.uniques.value = { ...this.uniques.value, ...this.propertiesForCellsWithDataBarsStyle };
+        this.empty.value = { ...this.empty.value, ...this.propertiesForCellsWithDataBarsStyle };
         this._formattersData.set("Data Bars", this.dataBars);
-        // this._formattersData.set("Greater Than", this.greaterThanAverate);
-        this._formattersData.set("Top 10%", this.top10Percent);
-        // this._formattersData.set("Text Contains", this.textContains);
-        // this._formattersData.set("Duplicate Values", this.duplicates);
-        // this._formattersData.set("Unique Values", this.uniques);
-        // this._formattersData.set("Empty Values", this.empty);
         this._formattersData.set("Color Scale", this.colorScale);
+        this._formattersData.set("Top 10%", this.top10Percent);
+        this._formattersData.set("Greater Than Average", this.greaterThanAverage);
+        this._formattersData.set("Text Contains", this.textContains);
+        this._formattersData.set("Duplicate Values", this.duplicates);
+        this._formattersData.set("Unique Values", this.uniques);
+        this._formattersData.set("Empty Values", this.empty);
 
     }
 
@@ -288,6 +339,14 @@ export class ConditionalFormatingDirective {
         return (90 * Math.floor(maxValue)) / 100;
     }
 
+    private rangeNumericData(range) {
+        return this.rangesCache.getNumericData(range);
+    }
+
+    private rangeTextData(range) {
+        return this.rangesCache.getTextData(range);
+    }
+
     private getAvgValue(range) {
         return this.rangesCache.getRangeAvgValue(range);
     }
@@ -295,6 +354,10 @@ export class ConditionalFormatingDirective {
     private getPercentage(of, from) {
         const res = (Math.ceil(of) / Math.ceil(from)) * 100;
         return res < 1 ? 1 : res;
+    }
+
+    private getRangeFormatType(range) {
+        return this.rangesCache.getFormatType(range);
     }
 
     private returnCachedStyle(style, rowData, colname, cellValue, rowIndex) {
