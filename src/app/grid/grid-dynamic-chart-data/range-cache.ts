@@ -34,16 +34,16 @@ export class RangeCache {
             maxValue,
             valueForComparison
         };
-        console.log(data);
         this.repository.set(rangeString, data);
     }
 
     public removeRange(range) {
-        const innerRange = this.getInnerRange(range);
+        for (const r of this.getInnerRange(range)) {
+            this.repository.delete(r);
+        }
+
         if (this.hasRange(JSON.stringify(range))) {
             this.repository.delete(JSON.stringify(range));
-        } else if (innerRange) {
-            this.repository.delete(innerRange);
         }
     }
 
@@ -123,7 +123,7 @@ export class RangeCache {
         }
     }
 
-    public getInnerRange(range) {
+    public * getInnerRange(range) {
         const iterator = this.repository.keys();
         for (let head = iterator.next().value; head !== undefined; head = iterator.next().value) {
             const cachedRange = JSON.parse(head);
@@ -131,10 +131,9 @@ export class RangeCache {
                 range.rowEnd >= cachedRange.rowEnd &&
                 range.columnStart <= cachedRange.columnStart &&
                 range.columnEnd >= cachedRange.columnEnd) {
-                    return head;
+                    yield head;
                 }
         }
-        return undefined;
     }
 
 }

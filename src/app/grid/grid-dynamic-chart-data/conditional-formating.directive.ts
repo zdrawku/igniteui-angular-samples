@@ -311,7 +311,6 @@ export class ConditionalFormatingDirective {
                 }
             });
             this.rangesCache.removeRange(this._currentRange);
-            console.log(this.rangesCache);
             this.grid.notifyChanges();
         }
     }
