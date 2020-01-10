@@ -2,8 +2,7 @@
     <igx-grid #grid conditionalFormatting primaryKey='ID' displayDensity="compact" [data]="data" [autoGenerate]="false">
         <igx-column field='ID' [hidden]='true'></igx-column>
         <igx-column field='Category' [editable]="true" [width]="'110px'"></igx-column>
-        <igx-column field='Type' [editable]="true" [filterable]='false' [width]="'130px'">
-        </igx-column>
+        <igx-column field='Type' [editable]="true" [filterable]='false' [width]="'130px'"></igx-column>
         <igx-column field='Country' [editable]="true" [width]="'100px'"></igx-column>
         <igx-column field='Price' dataType="number" [width]="'120px'" [editable]="true">
             <ng-template igxCell let-cell="cell">
@@ -27,7 +26,6 @@
         <igx-column field='Buy' [width]="'100px'" dataType="number" [formatter]="formatCurrency" [editable]="true">
         </igx-column>
 
-
         <igx-column field='BuyDiff' dataType="number" [width]="'120px'" [editable]="true">
             <ng-template igxCell let-cell="cell">
                 <div class="finjs-icons">
@@ -35,7 +33,6 @@
                 </div>
             </ng-template>
         </igx-column>
-
 
         <igx-column field='High(Y)' [width]="'100px'" dataType="number" [formatter]="formatCurrency" [editable]="true">
         </igx-column>
@@ -57,7 +54,6 @@
                 </div>
             </ng-template>
         </igx-column>
-
 
         <igx-column field='OpenPriceDiff' dataType="number" [width]="'140px'" [editable]="true">
             <ng-template igxCell let-cell="cell">
@@ -111,7 +107,6 @@
                 </div>
             </ng-template>
         </igx-column>
-
         <igx-column field='Region' [editable]="true"></igx-column>
         <igx-column field='Contract' [editable]="true"></igx-column>
         <igx-column field='Settlement' [width]="'150px'" [editable]="true"></igx-column>
@@ -123,13 +118,13 @@
         <igx-icon #icon style="pointer-events: none;" class="icon" fontSet="material">insert_chart_outlined</igx-icon>
     </button>
 </span>
-
+<!-- this block can be moved in another component -->
 <igx-dialog #chartSelectionDialog>
     <igx-tabs tabsType="fixed">
         <igx-tabs-group label="Conditional Formatting">
             <div class="tab-options-wrapper">
                 <div class="tab-option">
-                    <div *ngFor="let condition of formattersNames; trackBy: trackByFn" class="action">
+                    <div *ngFor="let condition of formattersNames" class="action">
                         <div class="btn condition" (click)="analyse(condition)">
                             <img style="width: 36px; height: 36px;"
                                 src="assets/images/svg/conditions/{{condition.replace(' ', '')}}.svg" />
@@ -142,14 +137,14 @@
                         <img style="width: 36px; height: 36px;"
                              src="assets/images/svg/conditions/Clear.svg" />
                          <span class="name">Clear</span>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </igx-tabs-group>
 
         <igx-tabs-group label="Create Chart" [disabled]="disableCreateChart">
             <div class="tab-option">
-                <div *ngFor="let chart of previewChartTypes; trackBy: trackByFn" class="action">
+                <div *ngFor="let chart of previewChartTypes" class="action">
                     <div class="btn chart"
                         (pointerdown)="createChart(currentChartArg, chartHost, chartDialog, _chartDialogOverlaySettings)"
                         (mouseleave)="chartPreviewDialog.close()" (mouseenter)="previewChart(chart)">
@@ -211,13 +206,13 @@
                 <div class="types-section">
                     <div (click)="createChart(chart, chartHost, chartDialog, chartDialog)"
                         [ngClass]="{'disableButton': chartsToDisable[chart.seriesType + chart.chartType]}"
-                        *ngFor="let chart of (chartType | getChartArgs); trackBy: trackByFn"
+                        *ngFor="let chart of (chartType | getChartArgs)"
                         style="width: 40%;margin-right: 5px; cursor: pointer;">
                         <img src="assets/images/svg/charts/{{chart.seriesType}}{{chart.chartType}}.svg" />
                     </div>
                 </div>
                 <igx-divider></igx-divider>
-            </div>
+            </div><!-- why this is not in the same collection as code above -->
             <div class="wrapper">
                 <div style="text-align: centre;">{{'pie' | titlecase}}</div>
                 <div style="text-align: center">
