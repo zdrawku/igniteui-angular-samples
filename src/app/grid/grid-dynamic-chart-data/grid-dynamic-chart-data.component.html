@@ -1,5 +1,5 @@
 <div igxOverlayOutlet class="grid-chart-contextmenu-wrapper">
-    <igx-grid #grid conditionalFormatting primaryKey='ID' displayDensity="compact" [data]="data" [autoGenerate]="false">
+    <igx-grid #grid conditionalFormatting [formatter]="currentFormatter" primaryKey='ID' displayDensity="compact" [data]="data" [autoGenerate]="false">
         <igx-column field='ID' [hidden]='true'></igx-column>
         <igx-column field='Category' [editable]="true" [width]="'110px'"></igx-column>
         <igx-column field='Type' [editable]="true" [filterable]='false' [width]="'130px'"></igx-column>
@@ -136,7 +136,7 @@
                     <div class="btn" (click)="clearFormatting()" [ngClass]="{'disableButton': !currentFormatter}">
                         <img style="width: 36px; height: 36px;"
                              src="assets/images/svg/conditions/Clear.svg" />
-                         <span class="name">Clear</span>
+                         <span class="name">Clear All</span>
                     </div>
                 </div>
             </div>
