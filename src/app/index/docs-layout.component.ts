@@ -24,6 +24,7 @@ export class DocsLayoutComponent implements OnInit {
     private onMessage(e: MessageEvent) {
         if (e.origin === e.data.origin && typeof e.data.themeStyle === "string") {
             this.styleElem.textContent = e.data.themeStyle;
+            this.removeDefaultStyleLink();
 
             const typeface = window.getComputedStyle(this.document.body).fontFamily.replace(/\"/g, "");
             if (!this.typefacesLoaded.includes(typeface)) {
@@ -34,6 +35,15 @@ export class DocsLayoutComponent implements OnInit {
             this.document.body.classList.remove(this.theme);
             this.document.body.classList.add(e.data.theme);
             this.theme = e.data.theme;
+        }
+    }
+
+    private removeDefaultStyleLink() {
+        const htmlCollection = this.document.getElementsByTagName('link');
+        const arr = Array.from(htmlCollection);
+        const style = arr.find(x => (x as any).href === window.location.origin + '/styles.css');
+        if (style) {
+            document.head.removeChild(style);
         }
     }
 

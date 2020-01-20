@@ -39,7 +39,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": false,
+              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -53,6 +53,7 @@
               ]
             },
             "es5": {
+              "extractCss": true,
               "budgets": [
                 {
                   "type": "anyComponentStyle",
